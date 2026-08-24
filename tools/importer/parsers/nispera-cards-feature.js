@@ -68,7 +68,9 @@ export default function parse(element, { document }) {
     const key = normalize(`${titleText} ${linkText}`);
     if (seen.has(key)) return;
     seen.add(key);
-    cells.push([body]);
+    // `card` item model is [image, text]; emit an empty image cell first so
+    // each field aligns to its own cell for JCR conversion (text-only feature).
+    cells.push([document.createElement('div'), body]);
   });
 
   if (!cells.length) {

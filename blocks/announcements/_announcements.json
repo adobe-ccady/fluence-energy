@@ -17,21 +17,6 @@
       }
     },
     {
-      "title": "Featured Announcement",
-      "id": "announcement-featured",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/block/v1/block/item",
-            "template": {
-              "name": "Featured",
-              "model": "announcement-featured"
-            }
-          }
-        }
-      }
-    },
-    {
       "title": "Announcement Item",
       "id": "announcement-item",
       "plugins": {
@@ -53,60 +38,37 @@
       "fields": []
     },
     {
-      "id": "announcement-featured",
-      "fields": [
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "eyebrow",
-          "label": "Eyebrow (category)"
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "heading",
-          "label": "Heading"
-        },
-        {
-          "component": "richtext",
-          "valueType": "string",
-          "name": "text",
-          "label": "Description"
-        },
-        {
-          "component": "aem-content",
-          "valueType": "string",
-          "name": "ctaLink",
-          "label": "CTA link"
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "ctaLinkText",
-          "label": "CTA label"
-        }
-      ]
-    },
-    {
       "id": "announcement-item",
       "fields": [
         {
           "component": "text",
           "valueType": "string",
           "name": "eyebrow",
-          "label": "Category label"
+          "label": "Eyebrow / category"
         },
         {
           "component": "text",
           "valueType": "string",
           "name": "heading",
-          "label": "Linked title"
+          "label": "Heading / linked title"
+        },
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "text",
+          "label": "Description (featured only)"
         },
         {
           "component": "aem-content",
           "valueType": "string",
           "name": "link",
-          "label": "Title link"
+          "label": "Link"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "linkText",
+          "label": "Link label"
         }
       ]
     }
@@ -115,7 +77,6 @@
     {
       "id": "announcements",
       "components": [
-        "announcement-featured",
         "announcement-item"
       ]
     }

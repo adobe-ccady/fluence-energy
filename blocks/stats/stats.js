@@ -27,9 +27,10 @@ export default function decorate(block) {
   const rows = [...block.children];
 
   rows.forEach((row) => {
-    const cell = row.firstElementChild || row;
-    const img = cell.querySelector('img');
-    const numberEl = cell.querySelector('h1, h2, h3, h4, h5, h6');
+    // Read across the whole row: each stat item is authored as separate cells
+    // (icon, number, label) per the `stat` item model.
+    const img = row.querySelector('img');
+    const numberEl = row.querySelector('h1, h2, h3, h4, h5, h6');
 
     // A row with neither an image nor a heading is the footnote.
     if (!img && !numberEl) {
@@ -60,7 +61,7 @@ export default function decorate(block) {
     }
 
     // Label — the last paragraph that is not the icon wrapper.
-    const label = [...cell.querySelectorAll('p')]
+    const label = [...row.querySelectorAll('p')]
       .filter((p) => !p.classList.contains('stats-item-icon'))
       .pop();
     if (label) label.classList.add('stats-item-label');

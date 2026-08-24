@@ -36,7 +36,6 @@
   {
     "id": "announcements",
     "components": [
-      "announcement-featured",
       "announcement-item"
     ]
   },
@@ -73,6 +72,12 @@
   },
   {
     "id": "hero",
+    "components": [
+      "hero-slide"
+    ]
+  },
+  {
+    "id": "hero-carousel",
     "components": [
       "hero-slide"
     ]

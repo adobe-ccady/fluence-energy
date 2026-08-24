@@ -16,79 +16,107 @@
 export default function parse(element, { document }) {
   const cells = [];
 
+  // The `announcement-item` model is [eyebrow, heading, text, link, linkText];
+  // linkText collapses into link. Emit one cell per field (eyebrow | heading |
+  // text | link) so each aligns to a column for JCR conversion. The runtime
+  // treats the first row as the featured lead and the rest as list items.
+
   // Row 1: featured lead (left region).
   const left = element.querySelector('.resource-block-left');
   if (left) {
-    const cell = [];
-
     const eyebrow = left.querySelector('h4');
+    const eyebrowCell = document.createElement('div');
     if (eyebrow && eyebrow.textContent.trim()) {
       const h4 = document.createElement('h4');
       h4.textContent = eyebrow.textContent.trim();
-      cell.push(h4);
+      eyebrowCell.appendChild(h4);
     }
 
     const heading = left.querySelector('h3, h2');
+    const headingCell = document.createElement('div');
     if (heading && heading.textContent.trim()) {
       const h3 = document.createElement('h3');
       h3.textContent = heading.textContent.trim();
-      cell.push(h3);
+      headingCell.appendChild(h3);
     }
 
     const para = left.querySelector('p');
+    const textCell = document.createElement('div');
     if (para && para.textContent.trim()) {
       const p = document.createElement('p');
       p.textContent = para.textContent.trim();
-      cell.push(p);
+      textCell.appendChild(p);
     }
 
     const cta = left.querySelector('a.button, a[href]');
+    const linkCell = document.createElement('div');
     if (cta) {
       const a = document.createElement('a');
-      a.className = 'button';
       a.href = cta.getAttribute('href');
       const target = cta.getAttribute('target');
       if (target) a.setAttribute('target', target);
       a.textContent = cta.textContent.trim();
       const p = document.createElement('p');
       p.appendChild(a);
-      cell.push(p);
+      linkCell.appendChild(p);
     }
 
-    if (cell.length) cells.push([cell]);
+    cells.push([eyebrowCell, headingCell, textCell, linkCell]);
   }
 
-  // Rows 2..n: categorized resource items (right region).
+  // Rows 2..n: categorized resource items (right region). One cell per field:
+  // eyebrow | heading | text (empty) | link. The heading text also becomes the
+  // link label so the item title is clickable (linkText collapses into link).
   const items = [...element.querySelectorAll('.resource-block-right .post-item')];
   items.forEach((item) => {
     const link = item.querySelector('a[href]');
     const href = link ? link.getAttribute('href') : null;
     const target = link ? link.getAttribute('target') : null;
-    const cell = [];
 
     const category = item.querySelector('h4');
+    const eyebrowCell = document.createElement('div');
     if (category && category.textContent.trim()) {
       const h4 = document.createElement('h4');
       h4.textContent = category.textContent.trim();
-      cell.push(h4);
+      eyebrowCell.appendChild(h4);
     }
 
     const title = item.querySelector('h3, h2');
-    if (title && title.textContent.trim()) {
+    const titleText = title && title.textContent.trim() ? title.textContent.trim() : '';
+
+    // heading cell — the title, as a link when the item has an href so the whole
+    // title is clickable (matches the runtime's per-item link behaviour).
+    const headingCell = document.createElement('div');
+    if (titleText) {
       const h3 = document.createElement('h3');
       if (href) {
         const a = document.createElement('a');
         a.href = href;
         if (target) a.setAttribute('target', target);
-        a.textContent = title.textContent.trim();
+        a.textContent = titleText;
         h3.appendChild(a);
       } else {
-        h3.textContent = title.textContent.trim();
+        h3.textContent = titleText;
       }
-      cell.push(h3);
+      headingCell.appendChild(h3);
     }
 
-    if (cell.length) cells.push([cell]);
+    // text cell — empty for list items (description is featured-only).
+    const textCell = document.createElement('div');
+
+    // link cell — the item href (aem-content field).
+    const linkCell = document.createElement('div');
+    if (href) {
+      const a = document.createElement('a');
+      a.href = href;
+      if (target) a.setAttribute('target', target);
+      a.textContent = titleText || href;
+      linkCell.appendChild(a);
+    }
+
+    if (titleText || eyebrowCell.childNodes.length) {
+      cells.push([eyebrowCell, headingCell, textCell, linkCell]);
+    }
   });
 
   if (!cells.length) {

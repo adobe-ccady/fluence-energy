@@ -21,25 +21,37 @@ export default function parse(element, { document }) {
   const cells = [];
   // Build 1-column table: optional bg-media row, then one row per real slide.
 
-  // Row 1: background media (poster image + video source link).
+  // Container (base `hero`) fields are [image, imageAlt→collapsed, text, video].
+  // The JCR converter maps each container field to its OWN leading ROW (like the
+  // default hero's image row + content row), then treats the remaining rows as
+  // repeating `hero-slide` items. So emit three single-cell container rows in
+  // field order — image, text (empty; slide text lives on the slides), video —
+  // followed by one row per slide. The runtime decorateCarousel reads the poster
+  // <img> and the video link from these leading background-media rows.
   const video = element.querySelector('video.hero-video-bkg, video');
   if (video) {
-    const bgCell = [];
+    // Row: image (poster) — container `image` field.
+    const imageCell = document.createElement('div');
     const poster = video.getAttribute('poster');
     if (poster) {
       const img = document.createElement('img');
       img.src = poster;
       img.setAttribute('alt', '');
-      bgCell.push(img);
+      imageCell.appendChild(img);
     }
+    cells.push([imageCell]);
+
+    // Row: video (link) — container `video` field. The container model for the
+    // carousel is [image, video]; one leading row per field, then slide items.
+    const videoCell = document.createElement('div');
     const src = video.getAttribute('src') || video.querySelector('source')?.getAttribute('src');
     if (src) {
       const a = document.createElement('a');
       a.href = src;
       a.textContent = src;
-      bgCell.push(a);
+      videoCell.appendChild(a);
     }
-    if (bgCell.length) cells.push([bgCell]);
+    cells.push([videoCell]);
   }
 
   // Remaining rows: one per real slide. Owl carousel injects .cloned duplicate
@@ -98,7 +110,7 @@ export default function parse(element, { document }) {
   }
 
   const block = WebImporter.Blocks.createBlock(document, {
-    name: 'Hero (hero-carousel)',
+    name: 'Hero Carousel',
     cells,
   });
   element.replaceWith(block);

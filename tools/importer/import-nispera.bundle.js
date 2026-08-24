@@ -296,7 +296,7 @@ var CustomImportScript = (() => {
       const key = normalize(`${titleText} ${linkText}`);
       if (seen.has(key)) return;
       seen.add(key);
-      cells.push([body]);
+      cells.push([document2.createElement("div"), body]);
     });
     if (!cells.length) {
       element.replaceWith(...element.childNodes);

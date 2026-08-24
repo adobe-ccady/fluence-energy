@@ -67,7 +67,9 @@ export default function parse(element, { document }) {
         // Clone address paragraphs to preserve their <br> line breaks.
         paras.forEach((p) => cell.appendChild(p.cloneNode(true)));
 
-        if (cell.childNodes.length) cells.push([cell]);
+        // `card` item model is [image, text]; emit an empty image cell first so
+        // each field aligns to its own cell for JCR conversion (text-only).
+        if (cell.childNodes.length) cells.push([document.createElement('div'), cell]);
       });
   });
 

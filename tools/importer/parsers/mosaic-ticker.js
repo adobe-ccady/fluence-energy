@@ -15,28 +15,29 @@
 export default function parse(element, { document }) {
   const links = [...element.querySelectorAll('ul li a, a[href]')];
 
-  const wrapper = document.createElement('div');
+  // Emit one row per market link so each maps to a repeating `ticker-item`
+  // (container + item table pattern). Each row is a single cell holding the
+  // link; the block's runtime JS reads the anchors from these rows.
+  const rows = [];
   links.forEach((link) => {
     const text = link.textContent.trim();
     if (!text) return;
-    const p = document.createElement('p');
     const a = document.createElement('a');
     a.href = link.getAttribute('href');
     const target = link.getAttribute('target');
     if (target) a.setAttribute('target', target);
     a.textContent = text;
-    p.appendChild(a);
-    wrapper.appendChild(p);
+    rows.push([a]);
   });
 
-  if (!wrapper.childElementCount) {
+  if (!rows.length) {
     element.replaceWith(...element.childNodes);
     return;
   }
 
   const block = WebImporter.Blocks.createBlock(document, {
     name: 'ticker',
-    cells: [[wrapper]],
+    cells: rows,
   });
   element.replaceWith(block);
 }

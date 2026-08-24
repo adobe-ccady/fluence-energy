@@ -47,22 +47,24 @@ var CustomImportScript = (() => {
     const cells = [];
     const video = element.querySelector("video.hero-video-bkg, video");
     if (video) {
-      const bgCell = [];
+      const imageCell = document2.createElement("div");
       const poster = video.getAttribute("poster");
       if (poster) {
         const img = document2.createElement("img");
         img.src = poster;
         img.setAttribute("alt", "");
-        bgCell.push(img);
+        imageCell.appendChild(img);
       }
+      cells.push([imageCell]);
+      const videoCell = document2.createElement("div");
       const src = video.getAttribute("src") || ((_a = video.querySelector("source")) == null ? void 0 : _a.getAttribute("src"));
       if (src) {
         const a = document2.createElement("a");
         a.href = src;
         a.textContent = src;
-        bgCell.push(a);
+        videoCell.appendChild(a);
       }
-      if (bgCell.length) cells.push([bgCell]);
+      cells.push([videoCell]);
     }
     let slides = [...element.querySelectorAll(".hero-carousel .hero-box")];
     if (!slides.length) slides = [...element.querySelectorAll(".hero-box")];
@@ -106,7 +108,7 @@ var CustomImportScript = (() => {
       return;
     }
     const block = WebImporter.Blocks.createBlock(document2, {
-      name: "Hero (hero-carousel)",
+      name: "Hero Carousel",
       cells
     });
     element.replaceWith(block);
@@ -277,34 +279,26 @@ var CustomImportScript = (() => {
     const items = [...element.querySelectorAll(".our-stat-item")];
     const cells = [];
     items.forEach((item) => {
-      const cell = [];
       const img = item.querySelector("img");
-      if (img) {
-        const p = document2.createElement("p");
-        p.appendChild(img.cloneNode(true));
-        cell.push(p);
-      }
+      const iconCell = document2.createElement("p");
+      if (img) iconCell.appendChild(img.cloneNode(true));
       const odometer = item.querySelector("[data-animate-number]");
       const heading = item.querySelector("h1, h2, h3, h4, h5, h6");
       const number = odometer ? odometer.getAttribute("data-animate-number") : heading ? heading.textContent.replace(/[^\d]/g, "") : "";
-      if (number) {
-        const h3 = document2.createElement("h3");
-        h3.textContent = number;
-        cell.push(h3);
-      }
+      const numberCell = document2.createElement("h3");
+      if (number) numberCell.textContent = number;
       const label = item.querySelector("p");
-      if (label && label.textContent.trim()) {
-        const p = document2.createElement("p");
-        p.innerHTML = label.innerHTML;
-        cell.push(p);
+      const labelCell = document2.createElement("p");
+      if (label && label.textContent.trim()) labelCell.innerHTML = label.innerHTML;
+      if (img || number || labelCell.textContent) {
+        cells.push([iconCell, numberCell, labelCell]);
       }
-      if (cell.length) cells.push([cell]);
     });
     const footnote = element.querySelector(".number-animation-block-footer p");
     if (footnote && footnote.textContent.trim()) {
-      const p = document2.createElement("p");
-      p.textContent = footnote.textContent.trim();
-      cells.push([[p]]);
+      const footnoteCell = document2.createElement("p");
+      footnoteCell.textContent = footnote.textContent.trim();
+      cells.push([document2.createElement("p"), document2.createElement("p"), footnoteCell]);
     }
     if (!cells.length) {
       element.replaceWith(...element.childNodes);
@@ -360,66 +354,81 @@ var CustomImportScript = (() => {
     const cells = [];
     const left = element.querySelector(".resource-block-left");
     if (left) {
-      const cell = [];
       const eyebrow = left.querySelector("h4");
+      const eyebrowCell = document2.createElement("div");
       if (eyebrow && eyebrow.textContent.trim()) {
         const h4 = document2.createElement("h4");
         h4.textContent = eyebrow.textContent.trim();
-        cell.push(h4);
+        eyebrowCell.appendChild(h4);
       }
       const heading = left.querySelector("h3, h2");
+      const headingCell = document2.createElement("div");
       if (heading && heading.textContent.trim()) {
         const h3 = document2.createElement("h3");
         h3.textContent = heading.textContent.trim();
-        cell.push(h3);
+        headingCell.appendChild(h3);
       }
       const para = left.querySelector("p");
+      const textCell = document2.createElement("div");
       if (para && para.textContent.trim()) {
         const p = document2.createElement("p");
         p.textContent = para.textContent.trim();
-        cell.push(p);
+        textCell.appendChild(p);
       }
       const cta = left.querySelector("a.button, a[href]");
+      const linkCell = document2.createElement("div");
       if (cta) {
         const a = document2.createElement("a");
-        a.className = "button";
         a.href = cta.getAttribute("href");
         const target = cta.getAttribute("target");
         if (target) a.setAttribute("target", target);
         a.textContent = cta.textContent.trim();
         const p = document2.createElement("p");
         p.appendChild(a);
-        cell.push(p);
+        linkCell.appendChild(p);
       }
-      if (cell.length) cells.push([cell]);
+      cells.push([eyebrowCell, headingCell, textCell, linkCell]);
     }
     const items = [...element.querySelectorAll(".resource-block-right .post-item")];
     items.forEach((item) => {
       const link = item.querySelector("a[href]");
       const href = link ? link.getAttribute("href") : null;
       const target = link ? link.getAttribute("target") : null;
-      const cell = [];
       const category = item.querySelector("h4");
+      const eyebrowCell = document2.createElement("div");
       if (category && category.textContent.trim()) {
         const h4 = document2.createElement("h4");
         h4.textContent = category.textContent.trim();
-        cell.push(h4);
+        eyebrowCell.appendChild(h4);
       }
       const title = item.querySelector("h3, h2");
-      if (title && title.textContent.trim()) {
+      const titleText = title && title.textContent.trim() ? title.textContent.trim() : "";
+      const headingCell = document2.createElement("div");
+      if (titleText) {
         const h3 = document2.createElement("h3");
         if (href) {
           const a = document2.createElement("a");
           a.href = href;
           if (target) a.setAttribute("target", target);
-          a.textContent = title.textContent.trim();
+          a.textContent = titleText;
           h3.appendChild(a);
         } else {
-          h3.textContent = title.textContent.trim();
+          h3.textContent = titleText;
         }
-        cell.push(h3);
+        headingCell.appendChild(h3);
       }
-      if (cell.length) cells.push([cell]);
+      const textCell = document2.createElement("div");
+      const linkCell = document2.createElement("div");
+      if (href) {
+        const a = document2.createElement("a");
+        a.href = href;
+        if (target) a.setAttribute("target", target);
+        a.textContent = titleText || href;
+        linkCell.appendChild(a);
+      }
+      if (titleText || eyebrowCell.childNodes.length) {
+        cells.push([eyebrowCell, headingCell, textCell, linkCell]);
+      }
     });
     if (!cells.length) {
       element.replaceWith(...element.childNodes);

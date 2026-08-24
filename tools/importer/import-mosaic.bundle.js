@@ -85,26 +85,24 @@ var CustomImportScript = (() => {
   // tools/importer/parsers/mosaic-ticker.js
   function parse2(element, { document: document2 }) {
     const links = [...element.querySelectorAll("ul li a, a[href]")];
-    const wrapper = document2.createElement("div");
+    const rows = [];
     links.forEach((link) => {
       const text = link.textContent.trim();
       if (!text) return;
-      const p = document2.createElement("p");
       const a = document2.createElement("a");
       a.href = link.getAttribute("href");
       const target = link.getAttribute("target");
       if (target) a.setAttribute("target", target);
       a.textContent = text;
-      p.appendChild(a);
-      wrapper.appendChild(p);
+      rows.push([a]);
     });
-    if (!wrapper.childElementCount) {
+    if (!rows.length) {
       element.replaceWith(...element.childNodes);
       return;
     }
     const block = WebImporter.Blocks.createBlock(document2, {
       name: "ticker",
-      cells: [[wrapper]]
+      cells: rows
     });
     element.replaceWith(block);
   }
@@ -273,19 +271,12 @@ var CustomImportScript = (() => {
     const cells = [];
     items.forEach((item) => {
       const wrap = item.querySelector(".page-content") || item;
-      const cell = [];
       const img = wrap.querySelector("img");
-      if (img) {
-        const p = document2.createElement("p");
-        p.appendChild(img.cloneNode(true));
-        cell.push(p);
-      }
+      const iconCell = document2.createElement("p");
+      if (img) iconCell.appendChild(img.cloneNode(true));
       const value = wrap.querySelector("h1, h2, h3, h4, h5, h6");
-      if (value && value.textContent.trim()) {
-        const h3 = document2.createElement("h3");
-        h3.textContent = value.textContent.trim();
-        cell.push(h3);
-      }
+      const numberCell = document2.createElement("h3");
+      if (value && value.textContent.trim()) numberCell.textContent = value.textContent.trim();
       const headings = [...wrap.querySelectorAll("h1, h2, h3, h4, h5, h6")];
       let labelEl = null;
       if (headings.length > 1) {
@@ -293,19 +284,20 @@ var CustomImportScript = (() => {
       } else {
         labelEl = [...wrap.querySelectorAll("p")].filter((p) => !p.querySelector("img")).pop() || null;
       }
+      const labelCell = document2.createElement("p");
       if (labelEl && labelEl !== value && labelEl.textContent.trim()) {
-        const p = document2.createElement("p");
-        p.textContent = labelEl.textContent.trim();
-        cell.push(p);
+        labelCell.textContent = labelEl.textContent.trim();
       }
-      if (cell.length) cells.push([cell]);
+      if (img || numberCell.textContent || labelCell.textContent) {
+        cells.push([iconCell, numberCell, labelCell]);
+      }
     });
     const next = element.nextElementSibling;
     const footnote = next && next.querySelector ? next.querySelector("p") : null;
+    let footnoteEl = null;
     if (footnote && footnote.textContent.trim()) {
-      const p = document2.createElement("p");
-      p.textContent = footnote.textContent.trim();
-      cells.push([[p]]);
+      footnoteEl = document2.createElement("p");
+      footnoteEl.textContent = footnote.textContent.trim();
       if (next && next.parentNode) next.remove();
     }
     if (!cells.length) {
@@ -324,6 +316,7 @@ var CustomImportScript = (() => {
       fragment.appendChild(h2);
     }
     fragment.appendChild(block);
+    if (footnoteEl) fragment.appendChild(footnoteEl);
     element.replaceWith(fragment);
   }
 
@@ -357,7 +350,8 @@ var CustomImportScript = (() => {
       const key = normalize2(`${titleText} ${descText}`);
       if (seen.has(key)) return;
       seen.add(key);
-      cells.push([row]);
+      const imageCell = document2.createElement("div");
+      cells.push([imageCell, row]);
     });
     if (!cells.length) {
       element.replaceWith(...element.childNodes);
@@ -426,7 +420,7 @@ var CustomImportScript = (() => {
         p.appendChild(a);
         body.appendChild(p);
       }
-      if (body.childElementCount) cells.push([body]);
+      if (body.childElementCount) cells.push([document2.createElement("div"), body]);
     });
     if (!cells.length) {
       element.replaceWith(...element.childNodes);

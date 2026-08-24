@@ -63,7 +63,11 @@ export default function parse(element, { document }) {
     const key = normalize(`${titleText} ${descText}`);
     if (seen.has(key)) return;
     seen.add(key);
-    cells.push([row]);
+    // The `card` item model is [image, text]. cards-feature is text-only, so
+    // emit an empty image cell first, then the heading+body text cell, so each
+    // model field aligns to its own cell for JCR conversion.
+    const imageCell = document.createElement('div');
+    cells.push([imageCell, row]);
   });
 
   if (!cells.length) {

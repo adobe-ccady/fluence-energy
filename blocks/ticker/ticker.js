@@ -1,7 +1,14 @@
 export default function decorate(block) {
-  // Extract items from the first cell (EDS block structure).
-  const cell = block.querySelector(':scope > div > div');
-  const paragraphs = cell ? [...cell.querySelectorAll('p')] : [];
+  // Extract items. Authored as a container + repeating items, each item is its
+  // own row/cell; older single-cell authoring nested them as <p> tags. Read
+  // paragraphs across all cells so both structures work.
+  const cells = [...block.querySelectorAll(':scope > div > div')];
+  const paragraphs = cells.length
+    ? cells.flatMap((c) => {
+      const ps = [...c.querySelectorAll('p')];
+      return ps.length ? ps : [c];
+    })
+    : [];
 
   // Detect link items (e.g. the Fluence market bar: CAISO | ERCOT | MISO | ...).
   // When the ticker holds links, render a STATIC centered row of clickable

@@ -28,46 +28,43 @@ export default function parse(element, { document }) {
   const items = [...element.querySelectorAll('.our-stat-item')];
   const cells = [];
 
+  // Each stat is one row with THREE cells matching the `stat` item model fields
+  // (icon, number, label) — one field per cell for JCR conversion (iconAlt
+  // collapses into the icon image).
   items.forEach((item) => {
-    const cell = [];
-
-    // Icon.
+    // Icon cell.
     const img = item.querySelector('img');
-    if (img) {
-      const p = document.createElement('p');
-      p.appendChild(img.cloneNode(true));
-      cell.push(p);
-    }
+    const iconCell = document.createElement('p');
+    if (img) iconCell.appendChild(img.cloneNode(true));
 
-    // Number — prefer the real target from data-animate-number, not the "0" text.
+    // Number cell — prefer the real target from data-animate-number, not "0".
     const odometer = item.querySelector('[data-animate-number]');
     const heading = item.querySelector('h1, h2, h3, h4, h5, h6');
     const number = odometer
       ? odometer.getAttribute('data-animate-number')
       : (heading ? heading.textContent.replace(/[^\d]/g, '') : '');
-    if (number) {
-      const h3 = document.createElement('h3');
-      h3.textContent = number;
-      cell.push(h3);
-    }
+    const numberCell = document.createElement('h3');
+    if (number) numberCell.textContent = number;
 
-    // Label — preserve <br> line breaks.
+    // Label cell — preserve <br> line breaks.
     const label = item.querySelector('p');
-    if (label && label.textContent.trim()) {
-      const p = document.createElement('p');
-      p.innerHTML = label.innerHTML;
-      cell.push(p);
-    }
+    const labelCell = document.createElement('p');
+    if (label && label.textContent.trim()) labelCell.innerHTML = label.innerHTML;
 
-    if (cell.length) cells.push([cell]);
+    if (img || number || labelCell.textContent) {
+      cells.push([iconCell, numberCell, labelCell]);
+    }
   });
 
-  // Centered footnote paragraph.
+  // Centered footnote — kept inside the block as a trailing stat-shaped row with
+  // empty icon/number cells and the footnote in the label cell. The runtime
+  // treats a row with no icon/number as the footnote; the converter maps it to a
+  // `stat` item (empty icon/number, label = footnote text).
   const footnote = element.querySelector('.number-animation-block-footer p');
   if (footnote && footnote.textContent.trim()) {
-    const p = document.createElement('p');
-    p.textContent = footnote.textContent.trim();
-    cells.push([[p]]);
+    const footnoteCell = document.createElement('p');
+    footnoteCell.textContent = footnote.textContent.trim();
+    cells.push([document.createElement('p'), document.createElement('p'), footnoteCell]);
   }
 
   if (!cells.length) {

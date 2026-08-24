@@ -121,7 +121,7 @@ var CustomImportScript = (() => {
           p.appendChild(a);
           cell.appendChild(p);
         }
-        if (cell.childNodes.length) cells.push([cell]);
+        if (cell.childNodes.length) cells.push([document2.createElement("div"), cell]);
       });
     });
     if (!cells.length) {
@@ -161,7 +161,7 @@ var CustomImportScript = (() => {
           cell.appendChild(h3);
         }
         paras.forEach((p) => cell.appendChild(p.cloneNode(true)));
-        if (cell.childNodes.length) cells.push([cell]);
+        if (cell.childNodes.length) cells.push([document2.createElement("div"), cell]);
       });
     });
     if (!cells.length) {

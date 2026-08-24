@@ -26,28 +26,24 @@ export default function parse(element, { document }) {
   const items = [...element.querySelectorAll('.l-column-item')];
   const cells = [];
 
+  // Each stat item is one row with THREE cells matching the `stat` item model
+  // fields (icon, number, label). One field → one cell so the JCR converter
+  // maps them positionally (iconAlt collapses into the icon image).
   items.forEach((item) => {
     const wrap = item.querySelector('.page-content') || item;
-    const cell = [];
 
-    // Icon.
+    // Icon cell.
     const img = wrap.querySelector('img');
-    if (img) {
-      const p = document.createElement('p');
-      p.appendChild(img.cloneNode(true));
-      cell.push(p);
-    }
+    const iconCell = document.createElement('p');
+    if (img) iconCell.appendChild(img.cloneNode(true));
 
-    // Value — the literal heading text (e.g. "up to 10%"). Keep verbatim.
+    // Number cell — the literal heading text (e.g. "up to 10%"). Keep verbatim.
     const value = wrap.querySelector('h1, h2, h3, h4, h5, h6');
-    if (value && value.textContent.trim()) {
-      const h3 = document.createElement('h3');
-      h3.textContent = value.textContent.trim();
-      cell.push(h3);
-    }
+    const numberCell = document.createElement('h3');
+    if (value && value.textContent.trim()) numberCell.textContent = value.textContent.trim();
 
-    // Label — the last heading after the value (h4 in source), or a trailing
-    // text paragraph that does not merely wrap the icon image.
+    // Label cell — the last heading after the value (h4 in source), or a
+    // trailing text paragraph that does not merely wrap the icon image.
     const headings = [...wrap.querySelectorAll('h1, h2, h3, h4, h5, h6')];
     let labelEl = null;
     if (headings.length > 1) {
@@ -55,25 +51,25 @@ export default function parse(element, { document }) {
     } else {
       labelEl = [...wrap.querySelectorAll('p')].filter((p) => !p.querySelector('img')).pop() || null;
     }
+    const labelCell = document.createElement('p');
     if (labelEl && labelEl !== value && labelEl.textContent.trim()) {
-      const p = document.createElement('p');
-      p.textContent = labelEl.textContent.trim();
-      cell.push(p);
+      labelCell.textContent = labelEl.textContent.trim();
     }
 
-    if (cell.length) cells.push([cell]);
+    if (img || numberCell.textContent || labelCell.textContent) {
+      cells.push([iconCell, numberCell, labelCell]);
+    }
   });
 
-  // Footnote — the paragraph in the following section. Copy it into the block,
-  // then REMOVE that source section so it doesn't also survive as a duplicate
-  // standalone paragraph after the block.
+  // Footnote — the paragraph in the following section. Emitted as a standalone
+  // paragraph AFTER the block (not as a stat item, which would break the item
+  // model). Then remove that source section to avoid a duplicate.
   const next = element.nextElementSibling;
   const footnote = next && next.querySelector ? next.querySelector('p') : null;
+  let footnoteEl = null;
   if (footnote && footnote.textContent.trim()) {
-    const p = document.createElement('p');
-    p.textContent = footnote.textContent.trim();
-    cells.push([[p]]);
-    // Drop the footnote's source section (it holds only this footnote).
+    footnoteEl = document.createElement('p');
+    footnoteEl.textContent = footnote.textContent.trim();
     if (next && next.parentNode) next.remove();
   }
 
@@ -97,5 +93,7 @@ export default function parse(element, { document }) {
     fragment.appendChild(h2);
   }
   fragment.appendChild(block);
+  // Footnote as default content BELOW the block.
+  if (footnoteEl) fragment.appendChild(footnoteEl);
   element.replaceWith(fragment);
 }

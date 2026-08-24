@@ -41,17 +41,17 @@
       "id": "ticker-item",
       "fields": [
         {
-          "component": "text",
-          "valueType": "string",
-          "name": "label",
-          "label": "Label"
-        },
-        {
           "component": "aem-content",
           "valueType": "string",
           "name": "link",
           "label": "Link (optional)",
           "description": "If set, items render as a static row of links; otherwise a scrolling marquee."
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "linkText",
+          "label": "Label"
         }
       ]
     }

@@ -165,60 +165,37 @@
     "fields": []
   },
   {
-    "id": "announcement-featured",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "eyebrow",
-        "label": "Eyebrow (category)"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "heading",
-        "label": "Heading"
-      },
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "text",
-        "label": "Description"
-      },
-      {
-        "component": "aem-content",
-        "valueType": "string",
-        "name": "ctaLink",
-        "label": "CTA link"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "ctaLinkText",
-        "label": "CTA label"
-      }
-    ]
-  },
-  {
     "id": "announcement-item",
     "fields": [
       {
         "component": "text",
         "valueType": "string",
         "name": "eyebrow",
-        "label": "Category label"
+        "label": "Eyebrow / category"
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "heading",
-        "label": "Linked title"
+        "label": "Heading / linked title"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Description (featured only)"
       },
       {
         "component": "aem-content",
         "valueType": "string",
         "name": "link",
-        "label": "Title link"
+        "label": "Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "linkText",
+        "label": "Link label"
       }
     ]
   },
@@ -514,6 +491,13 @@
         "label": "Image alt text"
       },
       {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Content",
+        "description": "Eyebrow, heading, and optional supporting text for the default (non-carousel) hero."
+      },
+      {
         "component": "aem-content",
         "valueType": "string",
         "name": "video",
@@ -523,32 +507,51 @@
     ]
   },
   {
-    "id": "hero-slide",
+    "id": "hero-carousel",
     "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Background poster image",
+        "description": "Poster shown before/behind the background video."
+      },
       {
         "component": "text",
         "valueType": "string",
-        "name": "eyebrow",
-        "label": "Eyebrow"
+        "name": "imageAlt",
+        "label": "Image alt text"
       },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "video",
+        "label": "Background video",
+        "description": "Link to a .mp4/.webm/.ogg used as the autoplaying background."
+      }
+    ]
+  },
+  {
+    "id": "hero-slide",
+    "fields": [
       {
         "component": "richtext",
         "valueType": "string",
         "name": "text",
         "label": "Heading & body",
-        "description": "Slide heading and optional supporting paragraph."
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "ctaLabel",
-        "label": "CTA label"
+        "description": "Optional eyebrow, slide heading, and optional supporting paragraph."
       },
       {
         "component": "aem-content",
         "valueType": "string",
         "name": "ctaLink",
         "label": "CTA link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "ctaLinkText",
+        "label": "CTA label"
       }
     ]
   },
@@ -888,17 +891,17 @@
     "id": "ticker-item",
     "fields": [
       {
-        "component": "text",
-        "valueType": "string",
-        "name": "label",
-        "label": "Label"
-      },
-      {
         "component": "aem-content",
         "valueType": "string",
         "name": "link",
         "label": "Link (optional)",
         "description": "If set, items render as a static row of links; otherwise a scrolling marquee."
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "linkText",
+        "label": "Label"
       }
     ]
   },

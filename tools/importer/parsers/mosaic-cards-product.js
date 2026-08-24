@@ -64,7 +64,9 @@ export default function parse(element, { document }) {
       body.appendChild(p);
     }
 
-    if (body.childElementCount) cells.push([body]);
+    // `card` item model is [image, text]; emit an empty image cell first so
+    // each field aligns to its own cell for JCR conversion (text-only product).
+    if (body.childElementCount) cells.push([document.createElement('div'), body]);
   });
 
   if (!cells.length) {
