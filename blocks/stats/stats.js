@@ -9,6 +9,28 @@
  *   row > cell > "footnote text"   (last row, no image or heading)
  */
 
+const IMG_URL_RE = /\.(png|jpe?g|gif|webp|avif|svg)(\?.*)?$/i;
+
+// In Universal Editor an image `reference` field holding an external URL is
+// rendered as a bare <a href="...png"> or plain-text URL rather than an <img>.
+// Promote such links/text within a cell into a real <img> so the icon shows.
+function promoteImageLinks(scope) {
+  if (!scope || scope.querySelector('img')) return;
+  const link = [...scope.querySelectorAll('a[href]')]
+    .find((a) => IMG_URL_RE.test(a.getAttribute('href')));
+  let url = link ? link.getAttribute('href') : null;
+  if (!url) {
+    const text = (scope.textContent || '').trim();
+    if (IMG_URL_RE.test(text) && /^https?:\/\//i.test(text)) url = text;
+  }
+  if (!url) return;
+  const img = document.createElement('img');
+  img.src = url;
+  img.alt = '';
+  img.loading = 'lazy';
+  scope.replaceChildren(img);
+}
+
 function animateCount(el, target) {
   const duration = 1500;
   const start = performance.now();
@@ -27,6 +49,9 @@ export default function decorate(block) {
   const rows = [...block.children];
 
   rows.forEach((row) => {
+    // The icon cell may hold an image-URL link/text (UE external reference)
+    // instead of an <img> — promote it first.
+    promoteImageLinks(row.firstElementChild);
     // Read across the whole row: each stat item is authored as separate cells
     // (icon, number, label) per the `stat` item model.
     const img = row.querySelector('img');

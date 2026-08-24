@@ -1,5 +1,34 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 
+const IMG_URL_RE = /\.(png|jpe?g|gif|webp|avif|svg)(\?.*)?$/i;
+
+// In Universal Editor an image `reference` field holding an external URL is
+// rendered as a bare <a href="...png"> or plain-text URL rather than an <img>.
+// Promote an image-only cell's link/text into a real <img> so it is treated as
+// the card image (and not misclassified as a text body cell).
+function promoteImageCell(div) {
+  if (div.querySelector('img, picture')) return;
+  const anchors = [...div.querySelectorAll('a[href]')];
+  // Only promote when the cell is JUST an image link (no other real content),
+  // so we never turn a body CTA into an image.
+  const imgLink = anchors.find((a) => IMG_URL_RE.test(a.getAttribute('href')));
+  const text = (div.textContent || '').trim();
+  let url = null;
+  if (imgLink && anchors.length === 1 && text === imgLink.textContent.trim()) {
+    url = imgLink.getAttribute('href');
+  } else if (!anchors.length && IMG_URL_RE.test(text) && /^https?:\/\//i.test(text)) {
+    url = text;
+  }
+  if (!url) return;
+  const p = document.createElement('p');
+  const img = document.createElement('img');
+  img.src = url;
+  img.alt = '';
+  img.loading = 'lazy';
+  p.append(img);
+  div.replaceChildren(p);
+}
+
 export default function decorate(block) {
   // cards-product: product tiles with their own CTA link — no card-wide link
   // wrap and no tag-pill (first body <p> is the product title).
@@ -18,6 +47,9 @@ export default function decorate(block) {
   [...block.children].forEach((row) => {
     const li = document.createElement('li');
     while (row.firstElementChild) li.append(row.firstElementChild);
+    // Promote any image-URL-only cell (UE external reference) into a real <img>
+    // before classifying cells as image vs body.
+    [...li.children].forEach((div) => promoteImageCell(div));
     [...li.children].forEach((div) => {
       if (div.children.length === 1
         && (div.querySelector('picture') || div.querySelector(':scope > p > img'))) {
