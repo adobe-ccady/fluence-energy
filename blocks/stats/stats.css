@@ -1,0 +1,111 @@
+/* Stats block — centered row of circular line-icon + number + label.
+   Values extracted from source: fluenceenergy.com .our-stat-block
+   Two number treatments exist in the source:
+   - Numeric count-up stats (homepage): 50px→70px, weight 500, brand blue.
+   - Static text stats (mosaic, e.g. "up to 10%", "900k+"): 42px, weight 700.
+   A flex row auto-centers whatever item count is authored (4-up / 3-up). */
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--gap-lg);
+  text-align: center;
+}
+
+/* Each stat item stacks icon, number, label — center aligned.
+   flex 45% basis => 2-up on mobile, capped so wide screens stay tidy. */
+.stats .stats-item {
+  display: flex;
+  flex: 1 1 45%;
+  flex-direction: column;
+  align-items: center;
+  max-width: 300px;
+}
+
+/* Circular line-icon (the circle is drawn into the source PNG — no border) */
+.stats .stats-item-icon {
+  margin: 0;
+}
+
+.stats .stats-item-icon img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+/* Number — count-up numeric stat: brand blue, weight 500 (source odometer).
+   Source: 50px / line-height 55px below 1200px. */
+.stats .stats-item-number {
+  margin: 16px 0 0;
+  font-family: var(--heading-font-family);
+  font-size: 50px;
+  font-weight: 500;
+  line-height: 55px;
+  color: var(--brand-blue);
+}
+
+/* Static text stat (mosaic: "up to 10%", "900k+") — source 42px, weight 700. */
+.stats .stats-item-number-text {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* Label — 21px weight 600, primary text color (source #201c26) */
+.stats .stats-item-label {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+/* Footnote — small muted line, spans full width, centered below the row */
+.stats .stats-footnote {
+  flex: 0 0 100%;
+  margin-top: var(--gap-lg);
+}
+
+.stats .stats-footnote p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+/* Tablet / desktop — equal-width single row, centered.
+   Small flex-basis + max-width lets 3 or 4 items share one centered row. */
+@media (width >= 900px) {
+  .stats {
+    gap: var(--gap-md);
+  }
+
+  .stats .stats-item {
+    flex: 1 1 180px;
+    margin-top: 21px;
+  }
+
+  .stats .stats-item .stats-item-number {
+    margin-top: 21px;
+  }
+
+  .stats .stats-item-number-text {
+    font-size: 42px;
+  }
+}
+
+/* Large desktop — full-size numeric count-up numbers (source: 70px / 77px). */
+@media (width >= 1200px) {
+  .stats .stats-item-number {
+    font-size: 70px;
+    line-height: 77px;
+  }
+
+  .stats .stats-item-number-text {
+    font-size: 42px;
+    line-height: 1.4;
+  }
+}

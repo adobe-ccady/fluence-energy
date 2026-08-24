@@ -1,24 +1,36 @@
+/* stylelint-disable no-descending-specificity -- consolidated variant file */
+
+/* Hero block — base (full-bleed overlay) + variants (article) */
+
+/* Shared: full-bleed container — no section padding on hero */
+main > .hero-container {
+  padding: 0;
+}
+
 .hero-container .hero-wrapper {
   max-width: unset;
   padding: 0;
 }
 
-.hero {
-  position: relative;
-  padding: 40px 24px;
-  min-height: 300px;
-}
+/* ===== Base hero (full-bleed overlay with gradient) ===== */
 
-.hero h1 {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  color: var(--background-color);
+/* Set hero button shadow color — black on hero (over image) */
+.hero {
+  --btn-shadow: var(--dark-color);
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: min(65vh, 400px);
+  padding: var(--gap-2xl) var(--gap-lg);
+  overflow: hidden;
+  color: var(--text-on-dark);
 }
 
 .hero picture {
   position: absolute;
-  z-index: -1;
+  z-index: 0;
   inset: 0;
   object-fit: cover;
   box-sizing: border-box;
@@ -30,8 +42,487 @@
   height: 100%;
 }
 
-@media (width >= 900px) {
+/* overlay gradient — bottom-to-top for text readability */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(0deg, rgb(0 0 0 / 75%) 0%, rgb(0 0 0 / 45%) 40%, rgb(0 0 0 / 25%));
+  pointer-events: none;
+}
+
+.hero > div {
+  position: relative;
+  z-index: 2;
+  max-width: var(--container-max-width);
+  width: 100%;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.hero h1,
+.hero h2,
+.hero h3,
+.hero h4,
+.hero h5,
+.hero h6 {
+  color: var(--background-color);
+  margin-bottom: var(--gap-lg);
+  text-shadow: 0 1px 3px rgb(0 0 0 / 35%);
+}
+
+.hero h1 {
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  max-width: 608px;
+}
+
+/* Base inner-page hero h1 — source: weight 500, line-height 60/50 = 1.2,
+   letter-spacing normal, spans the full content column (no 608px clamp).
+   Scoped to :not(.article) so the article variant keeps its own h1 styling. */
+.hero:not(.article) h1 {
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: normal;
+  max-width: none;
+}
+
+.hero p:not(.tag-pill) {
+  color: var(--text-on-dark);
+  font-size: var(--body-font-size-m);
+  line-height: 1.6;
+  max-width: 608px;
+  text-shadow: 0 1px 3px rgb(0 0 0 / 35%);
+}
+
+/* eyebrow pill — uses .tag-pill utility, adds hero-specific overrides */
+.hero .tag-pill {
+  margin-bottom: var(--gap-md);
+  text-shadow: none;
+}
+
+/* Base inner-page hero eyebrow — source is a plain teal-bright uppercase
+   label (NOT the blue .tag-pill chip): color #48e0d1, uppercase, weight 700,
+   18px/25.2px, letter-spacing normal, no background/padding/radius.
+   Scoped to :not(.article) so the article variant keeps its pill chips. */
+.hero:not(.article) .tag-pill {
+  display: block;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  color: var(--brand-teal-bright);
+  margin-bottom: 13.5px;
+}
+
+/* lead paragraph — after h1 */
+.hero > div > h1 + p {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-on-dark);
+  max-width: 608px;
+  margin-bottom: var(--gap-lg);
+}
+
+/* button group — higher specificity to override .section.dark .button-group centering */
+.section .hero .button-group {
+  justify-content: flex-start;
+}
+
+.hero .button-wrapper {
+  display: inline-block;
+  margin-right: var(--gap-md);
+}
+
+.hero .button-wrapper:last-child {
+  margin-right: 0;
+}
+
+/*
+ * Hero buttons — must override the global reset (main a.button:any-link)
+ * which strips padding, border-radius, box-shadow, font-size, etc.
+ * Specificity of reset: 0,2,1 — we use main .hero a.button:any-link (0,3,1)
+ */
+main .hero a.button:any-link {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--button-border-radius);
+  padding: var(--button-padding);
+  font-family: var(--button-font-family);
+  font-size: var(--button-font-size);
+  font-weight: var(--button-font-weight);
+  letter-spacing: var(--button-letter-spacing);
+  line-height: 1.25;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 0 var(--btn-shadow, var(--dark-color));
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+main .hero a.button:any-link:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 0 var(--btn-shadow, var(--dark-color));
+  text-decoration: none;
+}
+
+main .hero a.button:any-link:active {
+  transform: translateY(0);
+  box-shadow: 0 0 0 var(--btn-shadow, var(--dark-color));
+}
+
+/* primary button on hero — accent bg, dark text */
+main .hero a.button.primary:any-link {
+  background: var(--accent-color);
+  border: 2px solid var(--accent-color);
+  color: var(--dark-color);
+}
+
+main .hero a.button.primary:any-link:hover {
+  filter: brightness(0.9);
+}
+
+/* secondary button on hero — white outline, dark shadow */
+main .hero a.button.secondary:any-link {
+  background: transparent;
+  border: 2px solid rgb(255 255 255 / 50%);
+  color: var(--background-color);
+}
+
+main .hero a.button.secondary:any-link:hover {
+  border-color: var(--background-color);
+  background-color: var(--accent-color);
+  color: var(--dark-color);
+}
+
+@media (width < 768px) {
+  .section .hero .button-group {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--gap-sm);
+  }
+
+  .hero .button-wrapper {
+    margin-right: 0;
+  }
+
+  main .hero a.button:any-link {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (width >= 768px) {
   .hero {
-    padding: 40px 32px;
+    min-height: 65vh;
+    padding: var(--gap-3xl) var(--gap-xl);
+  }
+
+  .hero p:not(.tag-pill) {
+    font-size: 20px;
+  }
+
+  .hero h1 {
+    font-size: var(--heading-font-size-xxl);
+    letter-spacing: -1.12px;
+  }
+
+  /* Base inner-page hero — source is a fixed-height full-bleed banner
+     (~480px) with content vertically centered, not a tall 65vh viewport
+     hero. Cap the height and re-assert normal letter-spacing on the h1
+     (the shared rule above sets -1.12px, but the source h1 is normal). */
+  .hero:not(.article) {
+    min-height: 480px;
+  }
+
+  .hero:not(.article) h1 {
+    letter-spacing: normal;
+  }
+}
+
+/* ===== Hero Article variant ===== */
+.hero.article {
+  min-height: min(55vh, 380px);
+}
+
+.hero.article p:not(.tag-pill) {
+  font-size: inherit;
+  line-height: inherit;
+  max-width: none;
+  margin: 0;
+}
+
+/* breadcrumbs — reset eyebrow styles from base */
+.hero.article > div > p:first-child {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  text-transform: none;
+  color: var(--text-on-dark);
+  margin-bottom: var(--gap-xl);
+}
+
+.hero.article a {
+  color: rgb(255 255 255 / 70%);
+  font-size: var(--body-font-size-s);
+}
+
+/* tag line — "Expedition · Americas · Hiking" (non-pill, text-only) */
+.hero.article > div > p:nth-child(2) {
+  font-family: var(--heading-font-family);
+  font-size: var(--tag-font-size);
+  font-weight: 600;
+  letter-spacing: var(--tag-letter-spacing);
+  color: var(--accent-color);
+  margin-bottom: var(--gap-md);
+}
+
+/* em-wrapped tag pills — uses .tag-pill utility, adds hero article overrides */
+.hero.article .tag-pill {
+  font-style: normal;
+  margin-right: var(--gap-sm);
+  margin-bottom: var(--gap-md);
+}
+
+/* author avatar — paragraph right after h1 containing only an img */
+.hero.article > div > h1 + p > img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgb(255 255 255 / 30%);
+}
+
+/* fallback: attribute-based avatar detection */
+.hero.article img[width="44"],
+.hero.article img[alt*="avatar"] {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgb(255 255 255 / 30%);
+}
+
+/* author name */
+.hero.article > div > h1 + p + p {
+  font-weight: 700;
+  color: var(--background-color);
+  margin-top: var(--gap-sm);
+}
+
+/* author date/read time */
+.hero.article > div > h1 + p + p + p {
+  color: var(--text-on-dark-muted);
+  font-size: var(--body-font-size-s);
+}
+
+@media (width >= 768px) {
+  .hero.article {
+    min-height: min(55vh, 420px);
+  }
+}
+
+/* ===== Hero Carousel variant (video background + rotating slides) =====
+ * Source: fluenceenergy.com homepage hero.background-video (Owl carousel).
+ * Full-bleed looping <video> + teal→blue gradient overlay at 0.53 opacity,
+ * white left-aligned content vertically centered, bottom-left pagination dots.
+ * Values below are exact source computed styles.
+ */
+.hero.hero-carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  /* source section height ~646px mobile (text wraps taller), 606px desktop */
+  min-height: 560px;
+  padding: 0;
+  overflow: hidden;
+  color: #fff;
+}
+
+/* Background media layer (video or poster image), behind gradient + content */
+.hero.hero-carousel .hero-carousel-bg {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  max-width: none;
+  margin: 0;
+}
+
+.hero.hero-carousel .hero-carousel-bg video,
+.hero.hero-carousel .hero-carousel-bg img,
+.hero.hero-carousel .hero-carousel-bg picture {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Gradient overlay — brand teal→blue at 0.53 opacity, between video + content.
+   Overrides the base .hero::after black gradient. */
+.hero.hero-carousel::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: var(--brand-gradient);
+  opacity: 0.53;
+  pointer-events: none;
+}
+
+/* Slides sit above the background + gradient. The track is the vertically
+   centered content column (flex centering on .hero.hero-carousel handles the
+   vertical placement — no asymmetric padding pushing it up). */
+.hero.hero-carousel .hero-carousel-track {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1264px;
+  margin: 0 auto;
+  padding: var(--gap-2xl) 24px;
+}
+
+.hero.hero-carousel .hero-carousel-slide {
+  display: none;
+  text-align: left;
+}
+
+.hero.hero-carousel .hero-carousel-slide > div {
+  max-width: 800px;
+  margin: 0;
+}
+
+.hero.hero-carousel .hero-carousel-slide.is-active {
+  display: block;
+  animation: hero-carousel-fade 0.6s ease;
+}
+
+@keyframes hero-carousel-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Eyebrow (h4 "OUR MISSION") — teal uppercase, source 17px/23.8px w700 */
+.hero.hero-carousel .hero-carousel-eyebrow {
+  margin: 0 0 28.9px;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 23.8px;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  color: var(--brand-teal-bright);
+  text-shadow: none;
+}
+
+/* Heading — source 40px/48px mobile, weight 500, white, no shadow */
+.hero.hero-carousel h1 {
+  max-width: none;
+  margin: 0 0 20px;
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 48px;
+  letter-spacing: normal;
+  color: #fff;
+  text-shadow: none;
+}
+
+/* Sub-paragraph — source 19px/30.4px, weight 700, white */
+.hero.hero-carousel .hero-carousel-slide p {
+  max-width: none;
+  margin: 0 0 19px;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 30.4px;
+  color: #fff;
+  text-shadow: none;
+}
+
+/* CTA paragraph — no bottom margin (it's the last element) */
+.hero.hero-carousel .hero-carousel-slide p:last-child {
+  margin-bottom: 0;
+}
+
+/* CTA — ghost button: transparent bg, 2px teal border, white uppercase text.
+   Source: 13.4px w700, padding 14.74px 22.78px, radius 6px. Styled directly
+   since EDS leaves the <p><a> as a plain link. */
+.hero.hero-carousel a.hero-carousel-cta:any-link {
+  box-sizing: border-box;
+  display: inline-block;
+  margin-top: 4px;
+  border: 2px solid var(--brand-teal-bright);
+  border-radius: 6px;
+  padding: 14.74px 22.78px;
+  background: transparent;
+  font-family: var(--body-font-family);
+  font-size: 13.4px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.hero.hero-carousel a.hero-carousel-cta:any-link:hover {
+  background: var(--brand-teal-bright);
+  color: var(--dark-color);
+  text-decoration: none;
+}
+
+/* Pagination dots — in normal flow inside the content track, directly under
+   the CTA button and left-aligned with the content. */
+.hero.hero-carousel .hero-carousel-dots {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  gap: 14px;
+  margin-top: 40px;
+  padding: 0;
+}
+
+.hero.hero-carousel .hero-carousel-dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 30px;
+  background: rgb(134 151 145);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.hero.hero-carousel .hero-carousel-dot.is-active {
+  background: #fff;
+}
+
+@media (width >= 768px) {
+  .hero.hero-carousel {
+    min-height: 606px;
+  }
+
+  .hero.hero-carousel .hero-carousel-track {
+    padding: var(--gap-3xl) 24px calc(var(--gap-3xl) + 40px);
+  }
+
+  /* Heading — desktop 50px/60px, weight 500 */
+  .hero.hero-carousel h1 {
+    margin: 0 0 25px;
+    font-size: 50px;
+    line-height: 60px;
   }
 }

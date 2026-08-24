@@ -1,0 +1,104 @@
+/* Ticker — scrolling activity tag marquee */
+
+/* Full-bleed container overrides */
+.ticker-container .ticker-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+main > .section.ticker-container {
+  padding: 0;
+  margin: 0;
+}
+
+.ticker {
+  overflow: hidden;
+  white-space: nowrap;
+  border-top: 1px solid var(--accent-color);
+  border-bottom: 1px solid var(--accent-color);
+  padding: var(--gap-md) 0;
+}
+
+.ticker .ticker-track {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-xl);
+  white-space: nowrap;
+  animation: ticker-scroll 40s linear infinite;
+  width: max-content;
+}
+
+.ticker .ticker-track span {
+  flex-shrink: 0;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-m);
+  font-weight: 700;
+  letter-spacing: -0.48px;
+  line-height: 32px;
+  color: var(--dark-color);
+}
+
+/* separator dots — accent orange */
+.ticker .ticker-track .ticker-sep {
+  color: var(--accent-color);
+}
+
+/* ===== Market link bar (static, link items) — Fluence mosaic hero =====
+   Brand-blue full-bleed bar with centered white uppercase links + pipe seps. */
+.ticker:has(.ticker-links) {
+  border: 0;
+  padding: 0;
+  background-color: var(--brand-blue);
+}
+
+.ticker .ticker-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-md);
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: var(--gap-md) var(--gap-lg);
+}
+
+.ticker .ticker-links a:any-link {
+  color: #fff;
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+}
+
+.ticker .ticker-links a:hover {
+  opacity: 0.8;
+  text-decoration: none;
+}
+
+.ticker .ticker-links .ticker-sep {
+  color: rgb(255 255 255 / 45%);
+}
+
+@keyframes ticker-scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* reduced motion: show static scrollable row */
+@media (prefers-reduced-motion: reduce) {
+  .ticker .ticker-track {
+    animation: none;
+  }
+
+  .ticker {
+    overflow-x: auto;
+  }
+}

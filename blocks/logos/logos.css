@@ -1,0 +1,52 @@
+/* Logos block — responsive partner/customer logo grid.
+   Source (fluenceenergy.com .customer-block .l-grid--five-col): flex-wrap grid,
+   centered, pre-greyed PNG logos (no CSS grayscale/opacity/hover on source).
+   Item widths: 100% mobile, 33.33% at >=600px, 20% at >=900px.
+   Vertical rhythm via item padding-top (64px) offset by grid negative margin. */
+
+.logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: -32px;
+}
+
+.logos .logos-item {
+  display: flex;
+  width: 100%;
+  padding-top: 64px;
+  box-sizing: border-box;
+}
+
+/* inner cell — 85% of item width, centered both axes (source: margin auto) */
+.logos .logos-logo {
+  width: 85%;
+  margin: auto;
+  text-align: center;
+}
+
+.logos .logos-logo a {
+  display: inline-block;
+}
+
+.logos .logos-logo img,
+.logos .logos-logo picture {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* tablet — 3 per row (source: >=760px width 33.33%) */
+@media (width >= 600px) {
+  .logos .logos-item {
+    width: 33.33%;
+  }
+}
+
+/* desktop — 5 per row (source: >=960px width 20%) */
+@media (width >= 900px) {
+  .logos .logos-item {
+    width: 20%;
+  }
+}

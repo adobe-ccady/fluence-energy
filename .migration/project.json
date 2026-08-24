@@ -1,0 +1,13 @@
+{
+  "sites": {
+    "fluence-energy": {
+      "previewOrg": "adobe-ccady",
+      "previewSite": "fluence-energy",
+      "contentHostUrl": "author-p193363-e2050261.adobeaemcloud.com",
+      "aemSitePath": "/content/fluence-energy",
+      "aemAssetsFolderPath": "/content/dam/fluence-energy",
+      "aemSiteName": "fluence-energy",
+      "aemSiteTitle": "Fluence Energy"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "status": "success",
+  "url": "https://fluenceenergy.com/",
+  "path": "index",
+  "timestamp": "2026-08-21T21:16:26.351Z",
+  "title": "Fluence | A Siemens and AES Company",
+  "template": "homepage",
+  "blocks": [
+    "#main > article.homepage > section.hero.background-video",
+    "#main > article.homepage > section.home-split-block-right",
+    "#main > article.homepage > section.home-split-block-right",
+    "#main > article.homepage > section.home-split-block-left",
+    "#main > article.homepage > section.cols-full-bkg--contact",
+    "#main > article.homepage > section.our-stat-block",
+    "#main > article.homepage > section.customer-block",
+    "#main > article.homepage > section.our-system-block",
+    "#main > article.homepage > section.resource-block"
+  ]
+}

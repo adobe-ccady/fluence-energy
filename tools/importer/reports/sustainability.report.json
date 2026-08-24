@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://fluenceenergy.com/sustainability/",
+  "path": "sustainability",
+  "timestamp": "2026-08-22T22:10:49.130Z",
+  "title": "Sustainability | Fluence",
+  "template": "sustainability",
+  "blocks": [
+    "#main > header.banner",
+    "#main > article > section:nth-of-type(2).split-content-section",
+    "#main > article > section:nth-of-type(3) .l-columns--2",
+    "#main > article > section:nth-of-type(5) .l-columns--2",
+    "#main > article > section:nth-of-type(8) .l-columns--2",
+    "#main > article > section:nth-of-type(11) .l-columns--2",
+    "#main > article > section:nth-of-type(14) .l-columns--2",
+    "#main > article > section:nth-of-type(6) .l-columns--3",
+    "#main > article > section:nth-of-type(6) .l-columns--4",
+    "#main > article > section:nth-of-type(18) .l-columns--3"
+  ]
+}

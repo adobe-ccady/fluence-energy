@@ -1,0 +1,19 @@
+{
+  "status": "success",
+  "url": "https://fluenceenergy.com/energy-storage-services/",
+  "path": "energy-storage-services",
+  "timestamp": "2026-08-22T23:54:26.425Z",
+  "title": "Energy Storage Services | Fluence - A Siemens and AES Company",
+  "template": "services",
+  "blocks": [
+    "#main > header.banner",
+    "#main > article > section:nth-of-type(3) .l-columns--2",
+    "#main > article > section:nth-of-type(5) .l-columns--2",
+    "#main > article > section:nth-of-type(6) .l-columns--2",
+    "#main > article > section:nth-of-type(7) .l-columns--2",
+    "#main > article > section:nth-of-type(9) .l-columns--2",
+    "#main > article > section:nth-of-type(4) .l-columns--3",
+    "#main > article > section:nth-of-type(8) .l-columns--4",
+    "#main > article > section:nth-of-type(11) .l-grid"
+  ]
+}

@@ -1,20 +1,278 @@
+/* stylelint-disable no-descending-specificity */
+
+/* ----------------------------------------------------------------
+   Footer — full-bleed Fluence brand-blue, white text
+   ---------------------------------------------------------------- */
 footer {
-  background-color: var(--light-color);
-  font-size: var(--body-font-size-xs);
+  background-color: var(--brand-blue);
+  color: #fff;
+  font-family: var(--body-font-family);
 }
 
-footer .footer > div {
-  margin: auto;
-  max-width: 1200px;
-  padding: 40px 24px 24px;
+footer .footer {
+  max-width: 100%;
 }
 
-footer .footer p {
+footer p {
   margin: 0;
 }
 
+footer a:any-link {
+  color: #fff;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+footer a:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Reset EDS section/wrapper chrome inside the footer. Exclude the two layout
+   regions (.footer-primary / .footer-siteinfo) so their own max-width + padding
+   apply — those classes sit on the .section > div wrapper. */
+footer .section,
+footer .section > div:not(.footer-primary, .footer-siteinfo) {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* ----------------------------------------------------------------
+   Top region (.footer-primary): brand logo + Connect / social
+   Source: padding 48px 40px 0
+   ---------------------------------------------------------------- */
+footer .footer-primary {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 48px 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xl);
+}
+
+footer .footer-branding {
+  display: flex;
+}
+
+footer .footer-branding p {
+  margin: 0;
+}
+
+footer .footer-brand-link {
+  display: inline-block;
+  line-height: 0;
+}
+
+footer .footer-logo-img {
+  width: 160px;
+  height: auto;
+  max-width: 100%;
+}
+
+/* Connect heading + social icons */
+footer .footer-social {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+}
+
+footer .footer-social h1,
+footer .footer-social h2,
+footer .footer-social h3,
+footer .footer-social h4,
+footer .footer-social h5,
+footer .footer-social h6 {
+  font-family: var(--heading-font-family);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 24px;
+  color: #fff;
+  margin: 0;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+footer .footer-social-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+footer .footer-social-link {
+  display: inline-flex;
+  width: 39px;
+  height: 39px;
+}
+
+footer .footer-social-link:hover {
+  text-decoration: none;
+  opacity: 0.85;
+}
+
+footer .footer-social-icon {
+  display: block;
+  width: 39px;
+  height: 39px;
+}
+
+/* ----------------------------------------------------------------
+   Bottom region (.footer-siteinfo): copyright + legal, GDPR, attribution
+   Source: padding 22px 40px 104px
+   ---------------------------------------------------------------- */
+footer .footer-siteinfo {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 22px 24px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-lg);
+}
+
+footer .footer-box-left {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Copyright + legal links row (inline, wraps on small screens) */
+footer .footer-legal-row {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  gap: 8px 0;
+}
+
+footer .footer-legal-row > p {
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 27.2px;
+  color: #fff;
+  margin: 0;
+}
+
+footer .footer-legal-list {
+  display: inline-flex;
+  flex-flow: row wrap;
+  align-items: center;
+  margin-left: 8px;
+}
+
+footer .footer-legal-list li {
+  display: inline-block;
+  margin-left: 8px;
+  padding-left: 12px;
+  border-left: 1px solid #fff;
+}
+
+footer .footer-legal-list li:first-child {
+  margin-left: 0;
+  padding-left: 0;
+  border-left: 0;
+}
+
+footer .footer-legal-list a:any-link {
+  font-size: 12.8px;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* GDPR paragraph — smaller, slightly muted */
+footer .footer-gdpr {
+  font-size: 11px;
+  line-height: 17.6px;
+  color: rgb(255 255 255 / 85%);
+  margin: 5.5px 0 11px;
+  max-width: 924px;
+}
+
+/* Attribution */
+footer .footer-imagebox {
+  display: flex;
+  align-items: center;
+}
+
+footer .footer-attribution {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  color: #fff;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Imagebox attribution — logo SVG (source 81x24), no underline */
+footer .footer-imagebox-link:any-link {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+  text-decoration: none;
+}
+
+footer .footer-imagebox-link:hover {
+  text-decoration: none;
+  opacity: 0.85;
+}
+
+footer .footer-imagebox-logo {
+  display: block;
+  width: 81px;
+  height: 24px;
+}
+
+/* ----------------------------------------------------------------
+   Desktop (≥ 900px) — logo left / Connect right, site-info as row
+   ---------------------------------------------------------------- */
 @media (width >= 900px) {
-  footer .footer > div {
-    padding: 40px 32px 24px;
+  footer .footer-primary {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 48px 40px 0;
+    gap: var(--gap-xl);
+  }
+
+  footer .footer-branding,
+  footer .footer-social {
+    flex: 1;
+  }
+
+  footer .footer-social {
+    justify-content: flex-end;
+  }
+
+  footer .footer-logo-img {
+    width: 160px;
+  }
+
+  footer .footer-siteinfo {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 40px 104px;
+    gap: var(--gap-2xl);
+  }
+
+  footer .footer-box-left {
+    flex: 1 1 auto;
+  }
+
+  footer .footer-imagebox {
+    flex: 0 0 auto;
   }
 }

@@ -1,0 +1,141 @@
+/* Announcements block — full-bleed brand-blue band with a featured lead (left)
+   and a stacked list of categorized resource links (right). Values extracted
+   from source computed styles (fluenceenergy.com resource-block). */
+
+/* Full-bleed blue band: the block owns its own background because the source
+   section is not tagged as an accent-blue section. The block escapes the
+   1124px section wrapper via the 100vw / negative-margin trick, then re-centers
+   its own content with an auto side gutter that caps content at 1124px. */
+.announcements {
+  box-sizing: border-box;
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+  padding-block: 32px;
+  padding-inline: 24px;
+  background-color: var(--brand-blue);
+  color: #fff;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-2xl);
+}
+
+/* --- Featured lead (left) --- */
+.announcements .announcements-featured > div {
+  display: block;
+}
+
+.announcements .announcements-featured h4 {
+  margin: 0 0 8.5px;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 23.8px;
+  text-transform: uppercase;
+  color: var(--brand-teal-bright);
+}
+
+.announcements .announcements-featured h3 {
+  margin: 0 0 14px;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 36.4px;
+  color: #fff;
+}
+
+.announcements .announcements-featured p {
+  margin: 0 0 17px;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 27.2px;
+  color: #fff;
+}
+
+.announcements .announcements-featured p:last-child {
+  margin-bottom: 0;
+}
+
+/* Ghost CTA button — transparent bg, teal border, white uppercase label */
+.announcements a.announcements-cta:any-link {
+  display: inline-block;
+  margin: 0;
+  padding: 14.74px 22.78px;
+  border: 2px solid var(--brand-teal-bright);
+  border-radius: 6px;
+  background: transparent;
+  font-size: 13.4px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+  transition: var(--button-transition);
+}
+
+.announcements a.announcements-cta:hover {
+  background-color: var(--brand-teal-bright);
+  color: var(--brand-blue);
+  text-decoration: none;
+}
+
+/* --- Categorized resource list (right) --- */
+.announcements .announcements-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.announcements .announcements-item > div {
+  display: block;
+}
+
+/* Divider between adjacent items (first item has no top border) */
+.announcements .announcements-item + .announcements-item {
+  margin-top: var(--gap-lg);
+  padding-top: var(--gap-xl);
+  border-top: 1px solid #fff;
+}
+
+.announcements .announcements-item-linked {
+  cursor: pointer;
+}
+
+.announcements .announcements-item h4 {
+  margin: 0 0 8.5px;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 23.8px;
+  text-transform: uppercase;
+  color: var(--brand-teal-bright);
+}
+
+.announcements .announcements-item h3 {
+  margin: 0 0 8.5px;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 27.2px;
+  color: #fff;
+}
+
+.announcements .announcements-item h3:last-child {
+  margin-bottom: 0;
+}
+
+.announcements .announcements-item h3 a:any-link {
+  color: #fff;
+  text-decoration: none;
+}
+
+.announcements .announcements-item-linked:hover h3 a {
+  text-decoration: underline;
+}
+
+/* --- Tablet/Desktop: two columns side by side (source switches at 768px) --- */
+@media (width >= 768px) {
+  .announcements {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    column-gap: 96px;
+    padding-block: 54.4px;
+
+    /* Cap centered content at the section width, symmetric gutters */
+    padding-inline: max(24px, calc((100vw - var(--container-max-width)) / 2));
+  }
+}

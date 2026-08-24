@@ -34,6 +34,13 @@
     ]
   },
   {
+    "id": "announcements",
+    "components": [
+      "announcement-featured",
+      "announcement-item"
+    ]
+  },
+  {
     "id": "cards",
     "components": [
       "card"
@@ -52,12 +59,34 @@
     ]
   },
   {
-    "id": "column",
+    "id": "footer",
     "components": [
-      "text",
-      "image",
-      "button",
-      "title"
+      "nav-link",
+      "footer-social"
+    ]
+  },
+  {
+    "id": "nav",
+    "components": [
+      "nav-link"
+    ]
+  },
+  {
+    "id": "hero",
+    "components": [
+      "hero-slide"
+    ]
+  },
+  {
+    "id": "logos",
+    "components": [
+      "logo"
+    ]
+  },
+  {
+    "id": "stats",
+    "components": [
+      "stat"
     ]
   },
   {
@@ -88,6 +117,12 @@
     "id": "tabs",
     "components": [
       "tabs-item"
+    ]
+  },
+  {
+    "id": "ticker",
+    "components": [
+      "ticker-item"
     ]
   },
   {

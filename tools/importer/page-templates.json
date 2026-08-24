@@ -1,0 +1,1150 @@
+{
+  "metadata": {
+    "projectType": "da"
+  },
+  "templates": [
+    {
+      "name": "homepage",
+      "urls": [
+        "https://fluenceenergy.com/"
+      ],
+      "coverageGaps": [],
+      "description": "Fluence Energy homepage. WordPress-based marketing landing page with: video-background hero carousel (multiple rotating slides), a series of alternating image/text split promo blocks (home-split-block-right / home-split-block-left), a stats/counter section, a customer logo grid, a products grid, an announcements/latest-content grid, and a two-column contact + newsletter CTA block. Note: canonical homepage is served at the site root (/) — /index.html returns 404.",
+      "blocks": [
+        {
+          "name": "hero",
+          "instances": [
+            "#main > article.homepage > section.hero.background-video"
+          ]
+        },
+        {
+          "name": "columns",
+          "instances": [
+            "#main > article.homepage > section.home-split-block-right",
+            "#main > article.homepage > section.home-split-block-left",
+            "#main > article.homepage > section.cols-full-bkg--contact"
+          ]
+        },
+        {
+          "name": "stats",
+          "instances": [
+            "#main > article.homepage > section.our-stat-block"
+          ]
+        },
+        {
+          "name": "logos",
+          "instances": [
+            "#main > article.homepage > section.customer-block"
+          ]
+        },
+        {
+          "name": "cards",
+          "instances": [
+            "#main > article.homepage > section.our-system-block"
+          ]
+        },
+        {
+          "name": "announcements",
+          "instances": [
+            "#main > article.homepage > section.resource-block"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "hero",
+          "name": "hero",
+          "selector": [
+            "#main > article.homepage > section.hero.background-video"
+          ],
+          "style": null,
+          "blocks": [
+            "hero"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "split-data-center",
+          "name": "split-data-center",
+          "selector": [
+            "#main > article.homepage > section.home-split-block-right:nth-of-type(2)"
+          ],
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "split-energy-storage-solutions",
+          "name": "split-energy-storage-solutions",
+          "selector": [
+            "#main > article.homepage > section.home-split-block-left"
+          ],
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "split-smartstack",
+          "name": "split-smartstack",
+          "selector": [
+            "#main > article.homepage > section.home-split-block-right:nth-of-type(4)"
+          ],
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "stats",
+          "name": "stats",
+          "selector": [
+            "#main > article.homepage > section.our-stat-block"
+          ],
+          "style": null,
+          "blocks": [
+            "stats"
+          ],
+          "defaultContent": [
+            "#main > article.homepage > section.our-stat-block h2"
+          ]
+        },
+        {
+          "id": "customers",
+          "name": "customers",
+          "selector": [
+            "#main > article.homepage > section.customer-block"
+          ],
+          "style": null,
+          "blocks": [
+            "logos"
+          ],
+          "defaultContent": [
+            "#main > article.homepage > section.customer-block h2"
+          ]
+        },
+        {
+          "id": "products",
+          "name": "products",
+          "selector": [
+            "#main > article.homepage > section.our-system-block"
+          ],
+          "style": null,
+          "blocks": [
+            "cards"
+          ],
+          "defaultContent": [
+            "#main > article.homepage > section.our-system-block h2"
+          ]
+        },
+        {
+          "id": "announcements",
+          "name": "announcements",
+          "selector": [
+            "#main > article.homepage > section.resource-block"
+          ],
+          "style": "accent-blue",
+          "blocks": [
+            "announcements"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "contact-cta",
+          "name": "contact-cta",
+          "selector": [
+            "#main > article.homepage > section.cols-full-bkg--contact"
+          ],
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        }
+      ]
+    },
+    {
+      "name": "mosaic",
+      "urls": [
+        "https://fluenceenergy.com/mosaic-intelligent-bidding-software/"
+      ],
+      "coverageGaps": [],
+      "description": "Fluence Mosaic intelligent bidding software product page. Full-bleed gradient hero (eyebrow + H1) + accent-blue market-link ticker; asymmetric text/image split; dark pull-quote testimonial; 3-stat row with footnote; dark two-column split; heading + 3 icon CTA columns; heading + 6 text feature cards; dark 3 market tiles with per-card CTA; centered test-drive CTA (default content); In the Press 4-col article-card grid. All sections reuse existing homepage blocks/variants.",
+      "blocks": [
+        {
+          "name": "hero",
+          "instances": [
+            "#main > header.banner"
+          ]
+        },
+        {
+          "name": "ticker",
+          "instances": [
+            "#main > .banner-nav-animation-wrap nav.navigation--banner"
+          ]
+        },
+        {
+          "name": "columns",
+          "instances": [
+            "#main article > section.fullwidth-column .columns-two-thirds",
+            "#main article > section.background-image .columns-two-thirds",
+            "#main article > section.section--no-divider .l-columns--3"
+          ]
+        },
+        {
+          "name": "stats",
+          "instances": [
+            "#main article > section:nth-of-type(3)"
+          ]
+        },
+        {
+          "name": "cards",
+          "instances": [
+            "#main article > section.color-option-1.section--no-top-pad .l-columns--3",
+            "#main article > section.color-option-4 .l-columns--3",
+            "#main article > section.advanced-full-width .l-grid--four-col"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "hero",
+          "name": "hero",
+          "selector": [
+            "#main > header.banner"
+          ],
+          "style": null,
+          "blocks": [
+            "hero"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "market-ticker",
+          "name": "market-ticker",
+          "selector": [
+            "#main > .banner-nav-animation-wrap"
+          ],
+          "style": null,
+          "blocks": [
+            "ticker"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "what-if",
+          "name": "what-if",
+          "selector": [
+            "#main article > section:nth-of-type(1)"
+          ],
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "testimonial",
+          "name": "testimonial",
+          "selector": [
+            "#main article > section.quote-block"
+          ],
+          "style": "dark",
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "stats",
+          "name": "stats",
+          "selector": [
+            "#main article > section:nth-of-type(3)"
+          ],
+          "style": null,
+          "blocks": [
+            "stats"
+          ],
+          "defaultContent": [
+            "#main article > section:nth-of-type(3) h2"
+          ]
+        },
+        {
+          "id": "technology-agnostic",
+          "name": "technology-agnostic",
+          "selector": [
+            "#main article > section:nth-of-type(5)"
+          ],
+          "style": "dark",
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "automates",
+          "name": "automates",
+          "selector": [
+            "#main article > section.section--no-divider",
+            "#main article > section:nth-of-type(6)"
+          ],
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": [
+            "#main article > section:nth-of-type(6) h2"
+          ]
+        },
+        {
+          "id": "power-tools",
+          "name": "power-tools",
+          "selector": [
+            "#main article > section:nth-of-type(9)"
+          ],
+          "style": null,
+          "blocks": [
+            "cards"
+          ],
+          "defaultContent": [
+            "#main article > section:nth-of-type(8) h2",
+            "#main article > section:nth-of-type(8) h3"
+          ]
+        },
+        {
+          "id": "markets",
+          "name": "markets",
+          "selector": [
+            "#main article > section.color-option-4"
+          ],
+          "style": "dark",
+          "blocks": [
+            "cards"
+          ],
+          "defaultContent": [
+            "#main article > section.color-option-4 h2"
+          ]
+        },
+        {
+          "id": "test-drive",
+          "name": "test-drive",
+          "selector": [
+            "#main article > section:nth-of-type(11)"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "#main article > section:nth-of-type(11)"
+          ]
+        },
+        {
+          "id": "in-the-press",
+          "name": "in-the-press",
+          "selector": [
+            "#main article > section.advanced-full-width:last-of-type"
+          ],
+          "style": null,
+          "blocks": [
+            "cards"
+          ],
+          "defaultContent": [
+            "#main article > section.advanced-full-width:last-of-type h2"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "services",
+      "urls": [
+        "https://fluenceenergy.com/energy-storage-services/"
+      ],
+      "coverageGaps": [],
+      "description": "Fluence Energy Storage Services product page. Full-bleed photo hero; intro paragraphs; brand-blue (accent) Remote Monitoring CTA band; alternating 2-column text/image promos (Smart Service, Complete/Shared/Guided Service, Fluence Academy); a 3-up icon promo-tile grid (Service Plans); a 4-up text tile grid (Delivery Services); centered Connect CTA; and a Want-to-learn-more blog-article card grid. All sections reuse existing blocks/variants (hero, columns-about, columns-promo, cards-article).",
+      "blocks": [
+        {
+          "name": "hero",
+          "instances": [
+            "#main header.banner"
+          ]
+        },
+        {
+          "name": "columns",
+          "instances": [
+            "#main > article > section:nth-of-type(3) .l-columns--2, #main > article > section:nth-of-type(3) .columns-two-thirds",
+            "#main > article > section:nth-of-type(4) .l-columns--3",
+            "#main > article > section:nth-of-type(5) .l-columns--2",
+            "#main > article > section:nth-of-type(6) .l-columns--2",
+            "#main > article > section:nth-of-type(7) .l-columns--2",
+            "#main > article > section:nth-of-type(8) .l-columns--4",
+            "#main > article > section:nth-of-type(9) .l-columns--2"
+          ]
+        },
+        {
+          "name": "cards",
+          "instances": [
+            "#main > article > section:nth-of-type(11) .l-grid, #main > article > section:nth-of-type(11) .l-columns--3"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "hero",
+          "name": "hero",
+          "selector": [
+            "#main header.banner"
+          ],
+          "style": null,
+          "blocks": [
+            "hero"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "intro",
+          "name": "intro",
+          "selector": [
+            "#main > article > section:nth-of-type(1)"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "#main > article > section:nth-of-type(1)"
+          ]
+        },
+        {
+          "id": "remote-monitoring",
+          "name": "remote-monitoring",
+          "selector": [
+            "#main > article > section:nth-of-type(2)"
+          ],
+          "style": "accent",
+          "blocks": [],
+          "defaultContent": [
+            "#main > article > section:nth-of-type(2)"
+          ]
+        },
+        {
+          "id": "service-solutions-smart",
+          "name": "service-solutions-smart",
+          "selector": [
+            "#main > article > section:nth-of-type(3)"
+          ],
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": [
+            "#main > article > section:nth-of-type(3) h2",
+            "#main > article > section:nth-of-type(3) h3"
+          ]
+        },
+        {
+          "id": "service-plans-three",
+          "name": "service-plans-three",
+          "selector": [
+            "#main > article > section:nth-of-type(4)"
+          ],
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": [
+            "#main > article > section:nth-of-type(4) h3"
+          ]
+        },
+        {
+          "id": "complete-service",
+          "name": "complete-service",
+          "selector": [
+            "#main > article > section:nth-of-type(5)"
+          ],
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "shared-service",
+          "name": "shared-service",
+          "selector": [
+            "#main > article > section:nth-of-type(6)"
+          ],
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "guided-service",
+          "name": "guided-service",
+          "selector": [
+            "#main > article > section:nth-of-type(7)"
+          ],
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "delivery-services",
+          "name": "delivery-services",
+          "selector": [
+            "#main > article > section:nth-of-type(8)"
+          ],
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": [
+            "#main > article > section:nth-of-type(8) h2"
+          ]
+        },
+        {
+          "id": "fluence-academy",
+          "name": "fluence-academy",
+          "selector": [
+            "#main > article > section:nth-of-type(9)"
+          ],
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "connect-with-us",
+          "name": "connect-with-us",
+          "selector": [
+            "#main > article > section:nth-of-type(10)"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "#main > article > section:nth-of-type(10)"
+          ]
+        },
+        {
+          "id": "want-to-learn-more",
+          "name": "want-to-learn-more",
+          "selector": [
+            "#main > article > section:nth-of-type(11)"
+          ],
+          "style": null,
+          "blocks": [
+            "cards"
+          ],
+          "defaultContent": [
+            "#main > article > section:nth-of-type(11) h2"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "nispera",
+      "urls": [
+        "https://fluenceenergy.com/nispera-energy-asset-performance-management-software/"
+      ],
+      "coverageGaps": [],
+      "description": "Fluence Nispera APM software product page. Full-bleed gradient hero; asymmetric intro with a stat callout; a 4-up icon feature grid; two pull-quote testimonials (one light, one dark); a series of alternating two-column text/image splits including two dark CUSTOMER CASE STUDY promos; a $800K savings split; a Want-to-Learn-More CTA; and an In the News & Blog article-card grid. Uses three source split-container patterns (.columns-two-thirds, .l-columns--2, .split-content-section). All sections reuse existing blocks/variants (hero, columns-split, columns-pullquote, cards-feature, cards-article).",
+      "blocks": [
+        {
+          "name": "hero",
+          "instances": [
+            "#main > header.banner"
+          ]
+        },
+        {
+          "name": "columns",
+          "instances": [
+            "#main > article > section:nth-of-type(1) .columns-two-thirds",
+            "#main > article > section:nth-of-type(4) .l-columns--2",
+            "#main > article > section:nth-of-type(5) .split-content-section, #main > article > section:nth-of-type(5)",
+            "#main > article > section:nth-of-type(6) .l-columns--2",
+            "#main > article > section:nth-of-type(8) .split-content-section, #main > article > section:nth-of-type(8)",
+            "#main > article > section:nth-of-type(10) blockquote",
+            "#main > article > section:nth-of-type(11) .l-columns--2",
+            "#main > article > section:nth-of-type(12) .split-content-section, #main > article > section:nth-of-type(12)",
+            "#main > article > section:nth-of-type(14) .split-content-section, #main > article > section:nth-of-type(14)",
+            "#main > article > section:nth-of-type(3) blockquote"
+          ]
+        },
+        {
+          "name": "cards",
+          "instances": [
+            "#main > article > section:nth-of-type(2) .l-columns--4",
+            "#main > article > section:nth-of-type(16) .l-grid"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "hero",
+          "name": "hero",
+          "selector": [
+            "#main > header.banner"
+          ],
+          "style": null,
+          "blocks": [
+            "hero"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "intro-apm-stat",
+          "name": "intro-apm-stat",
+          "selector": [
+            "#main > article > section:nth-of-type(1)"
+          ],
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "one-apm-icons",
+          "name": "one-apm-icons",
+          "selector": [
+            "#main > article > section:nth-of-type(2)"
+          ],
+          "style": null,
+          "blocks": [
+            "cards"
+          ],
+          "defaultContent": [
+            "#main > article > section:nth-of-type(2) h2",
+            "#main > article > section:nth-of-type(2) h3"
+          ]
+        },
+        {
+          "id": "quote-vedaschi",
+          "name": "quote-vedaschi",
+          "selector": [
+            "#main > article > section:nth-of-type(3)"
+          ],
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "spend-less-time",
+          "name": "spend-less-time",
+          "selector": [
+            "#main > article > section:nth-of-type(4)"
+          ],
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "case-study-lekela",
+          "name": "case-study-lekela",
+          "selector": [
+            "#main > article > section:nth-of-type(5)"
+          ],
+          "style": "dark",
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "optimize-downtime",
+          "name": "optimize-downtime",
+          "selector": [
+            "#main > article > section:nth-of-type(6)"
+          ],
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "savings-incident",
+          "name": "savings-incident",
+          "selector": [
+            "#main > article > section:nth-of-type(8)"
+          ],
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "quote-spannaus",
+          "name": "quote-spannaus",
+          "selector": [
+            "#main > article > section:nth-of-type(10)"
+          ],
+          "style": "dark",
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "streamline-comms",
+          "name": "streamline-comms",
+          "selector": [
+            "#main > article > section:nth-of-type(11)"
+          ],
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "case-study-aediles",
+          "name": "case-study-aediles",
+          "selector": [
+            "#main > article > section:nth-of-type(12)"
+          ],
+          "style": "dark",
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "om-services",
+          "name": "om-services",
+          "selector": [
+            "#main > article > section:nth-of-type(14)"
+          ],
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "want-to-learn-more",
+          "name": "want-to-learn-more",
+          "selector": [
+            "#main > article > section:nth-of-type(15)"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "#main > article > section:nth-of-type(15)"
+          ]
+        },
+        {
+          "id": "in-the-news",
+          "name": "in-the-news",
+          "selector": [
+            "#main > article > section:nth-of-type(16)"
+          ],
+          "style": null,
+          "blocks": [
+            "cards"
+          ],
+          "defaultContent": [
+            "#main > article > section:nth-of-type(16) h2"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "sustainability",
+      "urls": [
+        "https://fluenceenergy.com/sustainability/"
+      ],
+      "coverageGaps": [],
+      "description": "Fluence Sustainability (ESG) page. Full-bleed hero; a story intro split (image+text+READ THE REPORT); a CEO pull-quote split; a dark parallax vision band; alternating image/text topic splits for Responsible Sourcing, Environment, Social, Governance (each with photo bands + LEARN MORE CTAs between); a UN SDG icon grid (cards-icon); two centered contact/report blocks; a 3-column Letters & Policies link directory (columns-about); and a forward-looking-statements legal block. Reuses existing blocks + one new cards-icon variant. Empty advanced-full-width spacer sections are dropped on import.",
+      "blocks": [
+        {
+          "name": "hero",
+          "instances": [
+            "#main > header.banner"
+          ]
+        },
+        {
+          "name": "columns",
+          "instances": [
+            "#main > article > section:nth-of-type(2).split-content-section",
+            "#main > article > section:nth-of-type(3) .l-columns--2",
+            "#main > article > section:nth-of-type(5) .l-columns--2",
+            "#main > article > section:nth-of-type(8) .l-columns--2",
+            "#main > article > section:nth-of-type(11) .l-columns--2",
+            "#main > article > section:nth-of-type(14) .l-columns--2",
+            "#main > article > section:nth-of-type(18) .l-columns--3"
+          ]
+        },
+        {
+          "name": "cards",
+          "instances": [
+            "#main > article > section:nth-of-type(6) .l-columns--3, #main > article > section:nth-of-type(6) .l-columns--4"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "hero",
+          "name": "hero",
+          "selector": [
+            "#main > header.banner"
+          ],
+          "style": null,
+          "blocks": [
+            "hero"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "story-intro",
+          "name": "story-intro",
+          "selector": [
+            "#main > article > section:nth-of-type(2)"
+          ],
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "ceo-quote",
+          "name": "ceo-quote",
+          "selector": [
+            "#main > article > section:nth-of-type(3)"
+          ],
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "vision-band",
+          "name": "vision-band",
+          "selector": [
+            "#main > article > section:nth-of-type(4)"
+          ],
+          "style": "dark",
+          "blocks": [],
+          "defaultContent": [
+            "#main > article > section:nth-of-type(4)"
+          ]
+        },
+        {
+          "id": "responsible-sourcing",
+          "name": "responsible-sourcing",
+          "selector": [
+            "#main > article > section:nth-of-type(5)"
+          ],
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "sdg-grid",
+          "name": "sdg-grid",
+          "selector": [
+            "#main > article > section:nth-of-type(6)"
+          ],
+          "style": null,
+          "blocks": [
+            "cards"
+          ],
+          "defaultContent": [
+            "#main > article > section:nth-of-type(6) > .wrap > header, #main > article > section:nth-of-type(6) h2"
+          ]
+        },
+        {
+          "id": "environment-photo",
+          "name": "environment-photo",
+          "selector": [
+            "#main > article > section:nth-of-type(7)"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "#main > article > section:nth-of-type(7)"
+          ]
+        },
+        {
+          "id": "environment",
+          "name": "environment",
+          "selector": [
+            "#main > article > section:nth-of-type(8)"
+          ],
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "environment-cta",
+          "name": "environment-cta",
+          "selector": [
+            "#main > article > section:nth-of-type(9)"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "#main > article > section:nth-of-type(9)"
+          ]
+        },
+        {
+          "id": "social-photo",
+          "name": "social-photo",
+          "selector": [
+            "#main > article > section:nth-of-type(10)"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "#main > article > section:nth-of-type(10)"
+          ]
+        },
+        {
+          "id": "social",
+          "name": "social",
+          "selector": [
+            "#main > article > section:nth-of-type(11)"
+          ],
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "social-cta",
+          "name": "social-cta",
+          "selector": [
+            "#main > article > section:nth-of-type(12)"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "#main > article > section:nth-of-type(12)"
+          ]
+        },
+        {
+          "id": "governance-photo",
+          "name": "governance-photo",
+          "selector": [
+            "#main > article > section:nth-of-type(13)"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "#main > article > section:nth-of-type(13)"
+          ]
+        },
+        {
+          "id": "governance",
+          "name": "governance",
+          "selector": [
+            "#main > article > section:nth-of-type(14)"
+          ],
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "governance-cta",
+          "name": "governance-cta",
+          "selector": [
+            "#main > article > section:nth-of-type(15)"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "#main > article > section:nth-of-type(15)"
+          ]
+        },
+        {
+          "id": "questions",
+          "name": "questions",
+          "selector": [
+            "#main > article > section:nth-of-type(16)"
+          ],
+          "style": "center",
+          "blocks": [],
+          "defaultContent": [
+            "#main > article > section:nth-of-type(16)"
+          ]
+        },
+        {
+          "id": "report-docs",
+          "name": "report-docs",
+          "selector": [
+            "#main > article > section:nth-of-type(17)"
+          ],
+          "style": "center",
+          "blocks": [],
+          "defaultContent": [
+            "#main > article > section:nth-of-type(17)"
+          ]
+        },
+        {
+          "id": "letters-policies",
+          "name": "letters-policies",
+          "selector": [
+            "#main > article > section:nth-of-type(18)"
+          ],
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": [
+            "#main > article > section:nth-of-type(18) h2"
+          ]
+        },
+        {
+          "id": "forward-looking",
+          "name": "forward-looking",
+          "selector": [
+            "#main > article > section:nth-of-type(19)"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "#main > article > section:nth-of-type(19)"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "contact",
+      "urls": [
+        "https://fluenceenergy.com/contact/"
+      ],
+      "coverageGaps": [],
+      "description": "Fluence Contact page. Full-bleed hero (Contact Us eyebrow + H1). A Connect-with-Fluence section (heading + 5 inquiry tiles → cards-inquiry). Fluence Offices heading. Three regional office directories (Americas/EMEA/Asia Pacific → cards-office, address tiles, no images). Closing paragraph with a sales-inquiry link. No embedded form — all inquiries are outbound links. Reuses hero + new cards-inquiry/cards-office variants.",
+      "blocks": [
+        {
+          "name": "hero",
+          "instances": [
+            "#main > header.banner"
+          ]
+        },
+        {
+          "name": "cards",
+          "instances": [
+            "#main > article > section:nth-of-type(1) .l-columns, #main > article > section:nth-of-type(1) .l-grid",
+            "#main > article > section:nth-of-type(3) .l-columns, #main > article > section:nth-of-type(3) .l-grid",
+            "#main > article > section:nth-of-type(4) .l-columns, #main > article > section:nth-of-type(4) .l-grid",
+            "#main > article > section:nth-of-type(5) .l-columns, #main > article > section:nth-of-type(5) .l-grid"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "hero",
+          "name": "hero",
+          "selector": [
+            "#main > header.banner"
+          ],
+          "style": null,
+          "blocks": [
+            "hero"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "connect",
+          "name": "connect",
+          "selector": [
+            "#main > article > section:nth-of-type(1)"
+          ],
+          "style": null,
+          "blocks": [
+            "cards"
+          ],
+          "defaultContent": [
+            "#main > article > section:nth-of-type(1) h2"
+          ]
+        },
+        {
+          "id": "offices-heading",
+          "name": "offices-heading",
+          "selector": [
+            "#main > article > section:nth-of-type(2)"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "#main > article > section:nth-of-type(2)"
+          ]
+        },
+        {
+          "id": "americas",
+          "name": "americas",
+          "selector": [
+            "#main > article > section:nth-of-type(3)"
+          ],
+          "style": null,
+          "blocks": [
+            "cards"
+          ],
+          "defaultContent": [
+            "#main > article > section:nth-of-type(3) h2"
+          ]
+        },
+        {
+          "id": "emea",
+          "name": "emea",
+          "selector": [
+            "#main > article > section:nth-of-type(4)"
+          ],
+          "style": null,
+          "blocks": [
+            "cards"
+          ],
+          "defaultContent": [
+            "#main > article > section:nth-of-type(4) h2"
+          ]
+        },
+        {
+          "id": "apac",
+          "name": "apac",
+          "selector": [
+            "#main > article > section:nth-of-type(5)"
+          ],
+          "style": null,
+          "blocks": [
+            "cards"
+          ],
+          "defaultContent": [
+            "#main > article > section:nth-of-type(5) h2"
+          ]
+        },
+        {
+          "id": "closing",
+          "name": "closing",
+          "selector": [
+            "#main > article > section:nth-of-type(6)"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "#main > article > section:nth-of-type(6)"
+          ]
+        }
+      ]
+    }
+  ]
+}

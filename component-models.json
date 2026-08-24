@@ -161,6 +161,106 @@
     ]
   },
   {
+    "id": "announcements",
+    "fields": []
+  },
+  {
+    "id": "announcement-featured",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "eyebrow",
+        "label": "Eyebrow (category)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "heading",
+        "label": "Heading"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Description"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "ctaLink",
+        "label": "CTA link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "ctaLinkText",
+        "label": "CTA label"
+      }
+    ]
+  },
+  {
+    "id": "announcement-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "eyebrow",
+        "label": "Category label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "heading",
+        "label": "Linked title"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "link",
+        "label": "Title link"
+      }
+    ]
+  },
+  {
+    "id": "cards",
+    "fields": [
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "classes",
+        "label": "Variant",
+        "description": "Card layout / styling variant.",
+        "options": [
+          {
+            "name": "Article (image + linked title)",
+            "value": "cards-article"
+          },
+          {
+            "name": "Product (image + title + CTA)",
+            "value": "cards-product"
+          },
+          {
+            "name": "Feature (title + description)",
+            "value": "cards-feature"
+          },
+          {
+            "name": "Icon (icon + label)",
+            "value": "cards-icon"
+          },
+          {
+            "name": "Inquiry (heading + text + pill CTA)",
+            "value": "cards-inquiry"
+          },
+          {
+            "name": "Office (heading + address)",
+            "value": "cards-office"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "card",
     "fields": [
       {
@@ -168,20 +268,20 @@
         "valueType": "string",
         "name": "image",
         "label": "Image",
-        "multi": false
+        "description": "Optional. Leave empty for text-only variants (feature/inquiry/office)."
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "imageAlt",
-        "label": "Alt"
+        "label": "Image alt text"
       },
       {
         "component": "richtext",
+        "valueType": "string",
         "name": "text",
-        "value": "",
-        "label": "Text",
-        "valueType": "string"
+        "label": "Card body",
+        "description": "Heading, description, address, and/or CTA link for this card."
       }
     ]
   },
@@ -215,18 +315,45 @@
     "id": "columns",
     "fields": [
       {
-        "component": "text",
-        "valueType": "number",
-        "name": "columns",
-        "value": "",
-        "label": "Columns"
-      },
+        "component": "select",
+        "valueType": "string",
+        "name": "classes",
+        "label": "Variant",
+        "description": "Layout / styling variant for this columns block.",
+        "options": [
+          {
+            "name": "Split (image + content, 50/50)",
+            "value": "columns-split"
+          },
+          {
+            "name": "About (text + rounded image)",
+            "value": "columns-about"
+          },
+          {
+            "name": "Promo (icon + heading + text grid)",
+            "value": "columns-promo"
+          },
+          {
+            "name": "Pull quote",
+            "value": "columns-pullquote"
+          },
+          {
+            "name": "Call to action",
+            "value": "columns-cta"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "column",
+    "fields": [
       {
-        "component": "text",
-        "valueType": "number",
-        "name": "rows",
-        "value": "",
-        "label": "Rows"
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Content",
+        "description": "Heading, paragraphs, links, or a single image for this column."
       }
     ]
   },
@@ -256,18 +383,49 @@
     ]
   },
   {
-    "id": "form",
+    "id": "footer",
     "fields": [
       {
-        "component": "aem-content",
-        "name": "reference",
-        "label": "Form"
+        "component": "reference",
+        "valueType": "string",
+        "name": "logo",
+        "label": "Footer logo (SVG)",
+        "description": "Footer logo asset. Keep as SVG."
       },
       {
         "component": "text",
-        "name": "action",
-        "label": "Action URL",
-        "valueType": "string"
+        "valueType": "string",
+        "name": "logoAlt",
+        "label": "Footer logo alt text"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "copyright",
+        "label": "Copyright / legal text"
+      }
+    ]
+  },
+  {
+    "id": "footer-social",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "label",
+        "label": "Accessible label (e.g. Follow us on LinkedIn)"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "link",
+        "label": "Social profile URL"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "icon",
+        "label": "Icon (SVG)"
       }
     ]
   },
@@ -282,28 +440,142 @@
     ]
   },
   {
-    "id": "hero",
+    "id": "nav",
     "fields": [
       {
         "component": "reference",
         "valueType": "string",
+        "name": "logo",
+        "label": "Logo (SVG)",
+        "description": "Site logo asset. Keep as SVG."
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "logoAlt",
+        "label": "Logo alt text"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "brandLink",
+        "label": "Logo link (home)"
+      }
+    ]
+  },
+  {
+    "id": "nav-link",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "label",
+        "label": "Link label"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "link",
+        "label": "Link URL"
+      }
+    ]
+  },
+  {
+    "id": "hero",
+    "fields": [
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "classes",
+        "label": "Variant",
+        "description": "Full-bleed overlay hero, or a rotating carousel with a background video.",
+        "options": [
+          {
+            "name": "Default (image + content)",
+            "value": ""
+          },
+          {
+            "name": "Carousel (video background + slides)",
+            "value": "hero-carousel"
+          }
+        ]
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
         "name": "image",
-        "label": "Image",
-        "multi": false
+        "label": "Background / hero image",
+        "description": "Poster image. For the carousel variant this is the video poster."
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "imageAlt",
-        "label": "Alt",
-        "value": ""
+        "label": "Image alt text"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "video",
+        "label": "Background video (carousel only)",
+        "description": "Link to a .mp4/.webm/.ogg used as the autoplaying background."
+      }
+    ]
+  },
+  {
+    "id": "hero-slide",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "eyebrow",
+        "label": "Eyebrow"
       },
       {
         "component": "richtext",
+        "valueType": "string",
         "name": "text",
-        "value": "",
-        "label": "Text",
-        "valueType": "string"
+        "label": "Heading & body",
+        "description": "Slide heading and optional supporting paragraph."
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "ctaLabel",
+        "label": "CTA label"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "ctaLink",
+        "label": "CTA link"
+      }
+    ]
+  },
+  {
+    "id": "logos",
+    "fields": []
+  },
+  {
+    "id": "logo",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Logo image"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Logo alt text"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "link",
+        "label": "Link (optional)"
       }
     ]
   },
@@ -367,6 +639,41 @@
             ]
           }
         ]
+      }
+    ]
+  },
+  {
+    "id": "stats",
+    "fields": []
+  },
+  {
+    "id": "stat",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "icon",
+        "label": "Icon",
+        "description": "Circular line-icon shown above the number. Leave empty to make this row a full-width footnote."
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "iconAlt",
+        "label": "Icon alt text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "number",
+        "label": "Number",
+        "description": "A plain number (e.g. 314) counts up; values with text (e.g. \"up to 10%\") stay static."
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "label",
+        "label": "Label"
       }
     ]
   },
@@ -570,6 +877,28 @@
         "value": "",
         "label": "Content",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "ticker",
+    "fields": []
+  },
+  {
+    "id": "ticker-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "label",
+        "label": "Label"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "link",
+        "label": "Link (optional)",
+        "description": "If set, items render as a static row of links; otherwise a scrolling marquee."
       }
     ]
   },
