@@ -7,27 +7,50 @@
  *    or a bare <img> in a <p>) with no heading → used as the background layer.
  *  - Each remaining row = one slide with a heading, optional paragraph, and CTA.
  */
+const VIDEO_RE = /\.(mp4|webm|ogg)(\?.*)?$/i;
+const IMAGE_RE = /\.(png|jpe?g|gif|webp|avif)(\?.*)?$/i;
+
+// A row is "background media" when it has no heading and carries only media
+// references — a poster image and/or a link to a video (or image) file. The
+// carousel background can be authored as a single merged row (delivery/md2da)
+// or split across several leading rows (AEM Universal Editor renders each
+// container field — image, video — as its own row), so we scan all leading
+// non-heading rows and merge whatever media they hold.
+function isBackgroundRow(row) {
+  if (row.querySelector('h1,h2,h3,h4,h5,h6')) return false;
+  const hasImg = row.querySelector('picture, img');
+  const link = row.querySelector('a[href]');
+  const linkIsMedia = link && (VIDEO_RE.test(link.getAttribute('href')) || IMAGE_RE.test(link.getAttribute('href')));
+  // A row that only holds a plain paragraph of text (e.g. an empty container
+  // field) is background "filler" too, as long as it has no real slide content.
+  const hasText = (row.textContent || '').trim().length > 0;
+  return Boolean(hasImg || linkIsMedia || !hasText);
+}
+
 function decorateCarousel(block) {
   const rows = [...block.children];
 
-  // Detect an optional background-media row (media only, no heading).
-  let bgRow = null;
-  if (rows.length > 1) {
-    const first = rows[0];
-    const hasHeading = first.querySelector('h1,h2,h3,h4,h5,h6');
-    const hasMedia = first.querySelector('video, picture, img, a[href$=".mp4"]');
-    if (!hasHeading && hasMedia) bgRow = first;
+  // Collect the leading background-media rows (media/empty rows before the
+  // first slide row that has a heading).
+  const bgRows = [];
+  for (let i = 0; i < rows.length; i += 1) {
+    if (rows.length - bgRows.length <= 1) break; // always leave at least one slide
+    if (isBackgroundRow(rows[i])) bgRows.push(rows[i]);
+    else break;
   }
 
-  // Build background layer.
-  if (bgRow) {
-    bgRow.classList.add('hero-carousel-bg');
-    // Promote an <a> to a video file (.mp4/.webm/.ogg) into a muted, looping,
-    // autoplaying <video>. Use any sibling poster <img> as the video poster so
-    // a still frame shows before/if the video plays.
-    const videoLink = bgRow.querySelector('a[href$=".mp4"], a[href$=".webm"], a[href$=".ogg"]');
-    if (videoLink && !bgRow.querySelector('video')) {
-      const poster = bgRow.querySelector('img');
+  // Build the background layer from whatever the bg rows hold: a poster <img>
+  // and a link to a video file. Merge everything into the first bg row.
+  if (bgRows.length) {
+    const bg = bgRows[0];
+    bg.classList.add('hero-carousel-bg');
+
+    const posterImg = bgRows.map((r) => r.querySelector('img')).find(Boolean);
+    const videoLink = bgRows
+      .flatMap((r) => [...r.querySelectorAll('a[href]')])
+      .find((a) => VIDEO_RE.test(a.getAttribute('href')));
+
+    if (videoLink && !bg.querySelector('video')) {
       const video = document.createElement('video');
       video.src = videoLink.getAttribute('href');
       video.autoplay = true;
@@ -35,21 +58,20 @@ function decorateCarousel(block) {
       video.loop = true;
       video.playsInline = true;
       video.setAttribute('aria-hidden', 'true');
-      if (poster && poster.src) video.poster = poster.src;
-      // Replace the whole media paragraph/cell contents with just the video.
-      const holder = videoLink.closest('p') || videoLink;
-      holder.replaceWith(video);
-      // Drop the now-redundant poster picture wrapper if it remains.
-      const leftoverPicture = bgRow.querySelector('picture');
-      if (leftoverPicture) {
-        const pWrap = leftoverPicture.closest('p');
-        (pWrap || leftoverPicture).remove();
-      }
+      if (posterImg && posterImg.src) video.poster = posterImg.src;
+      bg.replaceChildren(video);
+    } else if (posterImg) {
+      // No video link — keep just the poster image as the background.
+      const pic = posterImg.closest('picture') || posterImg;
+      bg.replaceChildren(pic);
     }
+
+    // Drop any extra bg rows (their content has been merged into the first).
+    bgRows.slice(1).forEach((r) => r.remove());
   }
 
   // Remaining rows are slides.
-  const slides = rows.filter((r) => r !== bgRow);
+  const slides = rows.filter((r) => !bgRows.includes(r));
   const track = document.createElement('div');
   track.className = 'hero-carousel-track';
   slides.forEach((slide, i) => {
