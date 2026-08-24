@@ -84,34 +84,27 @@ export default function parse(element, { document }) {
     const title = item.querySelector('h3, h2');
     const titleText = title && title.textContent.trim() ? title.textContent.trim() : '';
 
-    // heading cell — the title, as a link when the item has an href so the whole
-    // title is clickable (matches the runtime's per-item link behaviour).
+    // For a resource item the title IS the link. Model it as the collapsing
+    // link pair (link href + linkText label) — the same structure the featured
+    // CTA uses, which round-trips cleanly through md->JCR. The `heading` and
+    // `text` cells stay EMPTY so the title is not duplicated (a linked <h3> in
+    // the text-type `heading` field would capture the href instead of the
+    // title). The runtime styles this link as the item title.
     const headingCell = document.createElement('div');
-    if (titleText) {
-      const h3 = document.createElement('h3');
-      if (href) {
-        const a = document.createElement('a');
-        a.href = href;
-        if (target) a.setAttribute('target', target);
-        a.textContent = titleText;
-        h3.appendChild(a);
-      } else {
-        h3.textContent = titleText;
-      }
-      headingCell.appendChild(h3);
-    }
-
-    // text cell — empty for list items (description is featured-only).
     const textCell = document.createElement('div');
 
-    // link cell — the item href (aem-content field).
     const linkCell = document.createElement('div');
-    if (href) {
+    if (href && titleText) {
       const a = document.createElement('a');
       a.href = href;
       if (target) a.setAttribute('target', target);
-      a.textContent = titleText || href;
+      a.textContent = titleText;
       linkCell.appendChild(a);
+    } else if (titleText) {
+      // No href — fall back to a plain heading so the title still shows.
+      const h3 = document.createElement('h3');
+      h3.textContent = titleText;
+      headingCell.appendChild(h3);
     }
 
     if (titleText || eyebrowCell.childNodes.length) {

@@ -409,27 +409,18 @@ var CustomImportScript = (() => {
       const title = item.querySelector("h3, h2");
       const titleText = title && title.textContent.trim() ? title.textContent.trim() : "";
       const headingCell = document2.createElement("div");
-      if (titleText) {
-        const h3 = document2.createElement("h3");
-        if (href) {
-          const a = document2.createElement("a");
-          a.href = href;
-          if (target) a.setAttribute("target", target);
-          a.textContent = titleText;
-          h3.appendChild(a);
-        } else {
-          h3.textContent = titleText;
-        }
-        headingCell.appendChild(h3);
-      }
       const textCell = document2.createElement("div");
       const linkCell = document2.createElement("div");
-      if (href) {
+      if (href && titleText) {
         const a = document2.createElement("a");
         a.href = href;
         if (target) a.setAttribute("target", target);
-        a.textContent = titleText || href;
+        a.textContent = titleText;
         linkCell.appendChild(a);
+      } else if (titleText) {
+        const h3 = document2.createElement("h3");
+        h3.textContent = titleText;
+        headingCell.appendChild(h3);
       }
       if (titleText || eyebrowCell.childNodes.length) {
         cells.push([eyebrowCell, headingCell, textCell, linkCell]);

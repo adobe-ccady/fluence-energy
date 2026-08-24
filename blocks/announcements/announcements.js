@@ -28,8 +28,16 @@ export default function decorate(block) {
   list.className = 'announcements-list';
   items.forEach((item) => {
     item.classList.add('announcements-item');
+    // Each item is authored as [eyebrow, heading(empty), text(empty), link].
+    // The title lives in the link cell; promote it into an <h3> so it matches
+    // the source styling (bold white linked title under the teal eyebrow).
+    const link = item.querySelector('a[href]');
+    if (link && !item.querySelector('h3')) {
+      const h3 = document.createElement('h3');
+      link.after(h3);
+      h3.append(link);
+    }
     // Make the whole item clickable via its title link, if present.
-    const link = item.querySelector('a');
     if (link) {
       item.classList.add('announcements-item-linked');
       item.addEventListener('click', (e) => {
@@ -37,6 +45,10 @@ export default function decorate(block) {
         link.click();
       });
     }
+    // Drop empty authored cells (empty heading/text divs) so they don't add gaps.
+    [...item.querySelectorAll(':scope > div')].forEach((cell) => {
+      if (!cell.textContent.trim() && !cell.querySelector('img,svg,a')) cell.remove();
+    });
     list.append(item);
   });
 
