@@ -77,12 +77,6 @@
     ]
   },
   {
-    "id": "hero-carousel",
-    "components": [
-      "hero-slide"
-    ]
-  },
-  {
     "id": "logos",
     "components": [
       "logo"

@@ -30,7 +30,13 @@ export default function parse(element, { document }) {
   // <img> and the video link from these leading background-media rows.
   const video = element.querySelector('video.hero-video-bkg, video');
   if (video) {
-    // Row: image (poster) — container `image` field.
+    // The base `hero` container model is [image, text, video] (classes excluded,
+    // imageAlt collapses into image). The JCR converter maps each container
+    // field to its own leading ROW, then treats remaining rows as `hero-slide`
+    // items. Emit three container rows in field order — image, text (empty; the
+    // slide text lives on the slides), video — then one row per slide. The
+    // runtime decorateCarousel reads the poster <img> and video link from these
+    // leading background-media rows.
     const imageCell = document.createElement('div');
     const poster = video.getAttribute('poster');
     if (poster) {
@@ -41,8 +47,10 @@ export default function parse(element, { document }) {
     }
     cells.push([imageCell]);
 
-    // Row: video (link) — container `video` field. The container model for the
-    // carousel is [image, video]; one leading row per field, then slide items.
+    // text field row — empty for the carousel container.
+    cells.push([document.createElement('div')]);
+
+    // video field row — link to the background video source.
     const videoCell = document.createElement('div');
     const src = video.getAttribute('src') || video.querySelector('source')?.getAttribute('src');
     if (src) {
@@ -110,7 +118,7 @@ export default function parse(element, { document }) {
   }
 
   const block = WebImporter.Blocks.createBlock(document, {
-    name: 'Hero Carousel',
+    name: 'Hero (hero-carousel)',
     cells,
   });
   element.replaceWith(block);

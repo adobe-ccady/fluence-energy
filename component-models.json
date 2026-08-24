@@ -507,31 +507,6 @@
     ]
   },
   {
-    "id": "hero-carousel",
-    "fields": [
-      {
-        "component": "reference",
-        "valueType": "string",
-        "name": "image",
-        "label": "Background poster image",
-        "description": "Poster shown before/behind the background video."
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "imageAlt",
-        "label": "Image alt text"
-      },
-      {
-        "component": "aem-content",
-        "valueType": "string",
-        "name": "video",
-        "label": "Background video",
-        "description": "Link to a .mp4/.webm/.ogg used as the autoplaying background."
-      }
-    ]
-  },
-  {
     "id": "hero-slide",
     "fields": [
       {

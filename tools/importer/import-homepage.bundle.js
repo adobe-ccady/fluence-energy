@@ -56,6 +56,7 @@ var CustomImportScript = (() => {
         imageCell.appendChild(img);
       }
       cells.push([imageCell]);
+      cells.push([document2.createElement("div")]);
       const videoCell = document2.createElement("div");
       const src = video.getAttribute("src") || ((_a = video.querySelector("source")) == null ? void 0 : _a.getAttribute("src"));
       if (src) {
@@ -108,7 +109,7 @@ var CustomImportScript = (() => {
       return;
     }
     const block = WebImporter.Blocks.createBlock(document2, {
-      name: "Hero Carousel",
+      name: "Hero (hero-carousel)",
       cells
     });
     element.replaceWith(block);
