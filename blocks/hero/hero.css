@@ -333,6 +333,76 @@ main .hero a.button.secondary:any-link:hover {
   }
 }
 
+/* ===== Hero Blog variant (article title banner — brand gradient, no image) =====
+ * Source: blog.fluenceenergy.com single-post banner (banner--single-post).
+ * Full-bleed brand teal->blue gradient (no photo, no overlay), white content,
+ * left-aligned and vertically centered within the content column. Content is a
+ * single authored row: h4 date eyebrow + h1 headline + h4 author byline.
+ * No CTA. Matches the inner-page title-banner pattern (which uses .hero) but
+ * with a gradient background instead of a photo, so it overrides the base
+ * .hero photo/overlay rules.
+ */
+.hero.hero-blog {
+  --btn-shadow: var(--dark-color);
+
+  min-height: min(45vh, 320px);
+  background: var(--brand-gradient);
+  color: var(--background-color);
+}
+
+/* No photo background layer and no dark overlay for the gradient banner. */
+.hero.hero-blog picture,
+.hero.hero-blog img {
+  display: none;
+}
+
+.hero.hero-blog::after {
+  content: none;
+}
+
+/* Date eyebrow (first h4) — teal-bright uppercase label, no shadow. */
+.hero.hero-blog > div > h4:first-child {
+  margin: 0 0 var(--gap-md);
+  font-family: var(--body-font-family);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  color: var(--brand-teal-bright);
+  text-shadow: none;
+}
+
+/* Headline — white, weight 500, normal letter-spacing, spans the column. */
+.hero.hero-blog h1 {
+  max-width: none;
+  margin: 0 0 var(--gap-md);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: normal;
+  color: var(--background-color);
+}
+
+/* Author byline (h4 after the h1) — muted white, mixed case, weight 400. */
+.hero.hero-blog h1 + h4,
+.hero.hero-blog > div > h4:last-child {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-s);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--text-on-dark);
+  text-shadow: none;
+}
+
+@media (width >= 768px) {
+  .hero.hero-blog {
+    min-height: min(45vh, 380px);
+  }
+}
+
 /* ===== Hero Carousel variant (video background + rotating slides) =====
  * Source: fluenceenergy.com homepage hero.background-video (Owl carousel).
  * Full-bleed looping <video> + teal→blue gradient overlay at 0.53 opacity,

@@ -472,6 +472,10 @@
             "value": ""
           },
           {
+            "name": "Blog article (gradient banner, no image)",
+            "value": "hero-blog"
+          },
+          {
             "name": "Carousel (video background + slides)",
             "value": "hero-carousel"
           }

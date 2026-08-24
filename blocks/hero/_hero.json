@@ -44,6 +44,7 @@
           "description": "Full-bleed overlay hero, or a rotating carousel with a background video.",
           "options": [
             { "name": "Default (image + content)", "value": "" },
+            { "name": "Blog article (gradient banner, no image)", "value": "hero-blog" },
             { "name": "Carousel (video background + slides)", "value": "hero-carousel" }
           ]
         },
