@@ -117,8 +117,12 @@ export default function parse(element, { document }) {
     return;
   }
 
+  // Pass the variant via `variants` (not embedded in `name`) so it is NOT
+  // humanized — this keeps the hyphenated `hero-carousel` class the runtime
+  // (blocks/hero/hero.js) checks for, rather than a capitalized "hero Carousel".
   const block = WebImporter.Blocks.createBlock(document, {
-    name: 'Hero (hero-carousel)',
+    name: 'Hero',
+    variants: ['hero-carousel'],
     cells,
   });
   element.replaceWith(block);

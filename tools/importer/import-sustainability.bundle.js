@@ -187,7 +187,8 @@ var CustomImportScript = (() => {
       return;
     }
     const block = WebImporter.Blocks.createBlock(document2, {
-      name: "Columns (columns-split)",
+      name: "Columns",
+      variants: ["columns-split"],
       cells: [row]
     });
     element.replaceWith(block);
@@ -237,7 +238,8 @@ var CustomImportScript = (() => {
       return;
     }
     const block = WebImporter.Blocks.createBlock(document2, {
-      name: "Columns (columns-pullquote)",
+      name: "Columns",
+      variants: ["columns-pullquote"],
       cells: [row]
     });
     element.replaceWith(block);
@@ -296,7 +298,8 @@ var CustomImportScript = (() => {
       });
     }
     const block = WebImporter.Blocks.createBlock(document2, {
-      name: "Cards (cards-icon)",
+      name: "Cards",
+      variants: ["cards-icon"],
       cells
     });
     element.replaceWith(block);
@@ -353,7 +356,8 @@ var CustomImportScript = (() => {
       return;
     }
     const block = WebImporter.Blocks.createBlock(document2, {
-      name: "Columns (columns-about)",
+      name: "Columns",
+      variants: ["columns-about"],
       cells: [row]
     });
     element.replaceWith(block);

@@ -129,7 +129,8 @@ var CustomImportScript = (() => {
       return;
     }
     const block = WebImporter.Blocks.createBlock(document2, {
-      name: "Cards (cards-inquiry)",
+      name: "Cards",
+      variants: ["cards-inquiry"],
       cells
     });
     element.replaceWith(block);
@@ -169,7 +170,8 @@ var CustomImportScript = (() => {
       return;
     }
     const block = WebImporter.Blocks.createBlock(document2, {
-      name: "Cards (cards-office)",
+      name: "Cards",
+      variants: ["cards-office"],
       cells
     });
     element.replaceWith(block);

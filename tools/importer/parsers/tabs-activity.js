@@ -84,7 +84,8 @@ export default function parse(element, { document }) {
 
     if (cardCells.length > 0) {
       const cardsBlock = WebImporter.Blocks.createBlock(document, {
-        name: 'Cards (cards-article)',
+        name: 'Cards',
+    variants: ['cards-article'],
         cells: cardCells,
       });
       section.appendChild(cardsBlock);

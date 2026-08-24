@@ -61,7 +61,8 @@ export default function parse(element, { document }) {
   cells.push([col1, col2]);
 
   const block = WebImporter.Blocks.createBlock(document, {
-    name: 'Columns (columns-pullquote)',
+    name: 'Columns',
+    variants: ['columns-pullquote'],
     cells,
   });
   element.replaceWith(block);

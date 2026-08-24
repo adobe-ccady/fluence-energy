@@ -83,7 +83,8 @@ export default function parse(element, { document }) {
   cells.push([contentWrapper]);
 
   const block = WebImporter.Blocks.createBlock(document, {
-    name: 'Hero (article)',
+    name: 'Hero',
+    variants: ['article'],
     cells,
   });
   element.replaceWith(block);

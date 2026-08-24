@@ -43,7 +43,8 @@ export default function parse(element, { document }) {
   });
 
   const block = WebImporter.Blocks.createBlock(document, {
-    name: 'Cards (cards-feature)',
+    name: 'Cards',
+    variants: ['cards-feature'],
     cells,
   });
   element.replaceWith(block);

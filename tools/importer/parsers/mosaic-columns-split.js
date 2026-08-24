@@ -74,7 +74,8 @@ export default function parse(element, { document }) {
   const row = isLeft ? [otherCell, contentCell] : [contentCell, otherCell];
 
   const block = WebImporter.Blocks.createBlock(document, {
-    name: 'Columns (columns-split)',
+    name: 'Columns',
+    variants: ['columns-split'],
     cells: [row],
   });
 

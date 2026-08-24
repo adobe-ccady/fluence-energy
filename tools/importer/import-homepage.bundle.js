@@ -109,7 +109,8 @@ var CustomImportScript = (() => {
       return;
     }
     const block = WebImporter.Blocks.createBlock(document2, {
-      name: "Hero (hero-carousel)",
+      name: "Hero",
+      variants: ["hero-carousel"],
       cells
     });
     element.replaceWith(block);
@@ -164,7 +165,8 @@ var CustomImportScript = (() => {
     const imageLeft = element.classList.contains("home-split-block-left");
     const row = imageLeft ? [imageCell, contentCell] : [contentCell, imageCell];
     const block = WebImporter.Blocks.createBlock(document2, {
-      name: "Columns (columns-split)",
+      name: "Columns",
+      variants: ["columns-split"],
       cells: [row]
     });
     element.replaceWith(block);
@@ -208,7 +210,8 @@ var CustomImportScript = (() => {
       return;
     }
     const block = WebImporter.Blocks.createBlock(document2, {
-      name: "Columns (columns-cta)",
+      name: "Columns",
+      variants: ["columns-cta"],
       cells: [row]
     });
     element.replaceWith(block);
@@ -252,7 +255,8 @@ var CustomImportScript = (() => {
       return;
     }
     const block = WebImporter.Blocks.createBlock(document2, {
-      name: "Cards (cards-product)",
+      name: "Cards",
+      variants: ["cards-product"],
       cells
     });
     const fragment = document2.createDocumentFragment();

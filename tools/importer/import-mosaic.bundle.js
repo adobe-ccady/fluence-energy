@@ -149,7 +149,8 @@ var CustomImportScript = (() => {
     const isLeft = grid.classList.contains("columns-two-thirds--left") || !!element.querySelector(".columns-two-thirds--left");
     const row = isLeft ? [otherCell, contentCell] : [contentCell, otherCell];
     const block = WebImporter.Blocks.createBlock(document2, {
-      name: "Columns (columns-split)",
+      name: "Columns",
+      variants: ["columns-split"],
       cells: [row]
     });
     element.replaceWith(block);
@@ -185,7 +186,8 @@ var CustomImportScript = (() => {
       return;
     }
     const block = WebImporter.Blocks.createBlock(document2, {
-      name: "Columns (columns-pullquote)",
+      name: "Columns",
+      variants: ["columns-pullquote"],
       cells: [[cell]]
     });
     element.replaceWith(block);
@@ -234,7 +236,8 @@ var CustomImportScript = (() => {
       return;
     }
     const block = WebImporter.Blocks.createBlock(document2, {
-      name: "Columns (columns-cta)",
+      name: "Columns",
+      variants: ["columns-cta"],
       cells: [cells]
     });
     const fragment = document2.createDocumentFragment();
@@ -358,7 +361,8 @@ var CustomImportScript = (() => {
       return;
     }
     const block = WebImporter.Blocks.createBlock(document2, {
-      name: "Cards (cards-feature)",
+      name: "Cards",
+      variants: ["cards-feature"],
       cells
     });
     section.querySelectorAll(".l-columns--3").forEach((grid) => {
@@ -427,7 +431,8 @@ var CustomImportScript = (() => {
       return;
     }
     const block = WebImporter.Blocks.createBlock(document2, {
-      name: "Cards (cards-product)",
+      name: "Cards",
+      variants: ["cards-product"],
       cells
     });
     element.replaceWith(block);
@@ -478,7 +483,8 @@ var CustomImportScript = (() => {
       return;
     }
     const block = WebImporter.Blocks.createBlock(document2, {
-      name: "Cards (cards-article)",
+      name: "Cards",
+      variants: ["cards-article"],
       cells
     });
     element.replaceWith(block);

@@ -103,7 +103,8 @@ export default function parse(element, { document }) {
   }
 
   const block = WebImporter.Blocks.createBlock(document, {
-    name: 'Cards (cards-icon)',
+    name: 'Cards',
+    variants: ['cards-icon'],
     cells,
   });
   element.replaceWith(block);

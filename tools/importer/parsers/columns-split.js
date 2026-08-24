@@ -84,7 +84,8 @@ export default function parse(element, { document }) {
   const row = imageLeft ? [imageCell, contentCell] : [contentCell, imageCell];
 
   const block = WebImporter.Blocks.createBlock(document, {
-    name: 'Columns (columns-split)',
+    name: 'Columns',
+    variants: ['columns-split'],
     cells: [row],
   });
   element.replaceWith(block);

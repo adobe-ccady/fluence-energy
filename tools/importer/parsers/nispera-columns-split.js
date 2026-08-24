@@ -213,7 +213,8 @@ export default function parse(element, { document }) {
   }
 
   const block = WebImporter.Blocks.createBlock(document, {
-    name: 'Columns (columns-split)',
+    name: 'Columns',
+    variants: ['columns-split'],
     cells: [row],
   });
   element.replaceWith(block);

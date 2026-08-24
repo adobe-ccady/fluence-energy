@@ -94,7 +94,8 @@ export default function parse(element, { document }) {
   }
 
   const block = WebImporter.Blocks.createBlock(document, {
-    name: 'Cards (cards-inquiry)',
+    name: 'Cards',
+    variants: ['cards-inquiry'],
     cells,
   });
 
