@@ -112,13 +112,39 @@ export default function transform(hookName, element, payload) {
     ]);
 
     // --- In-body HubSpot CTA embeds ------------------------------------------
-    // Empty JS-hydrated placeholders with no recoverable href/label — drop them.
-    // The first CTA is wrapped in an otherwise-empty <h2>; empty headings are
-    // cleaned up in afterTransform below.
-    WebImporter.DOMUtils.remove(element, [
-      '.hs-cta-embed',
-      '[class*="hs-cta-embed"]',
-    ]);
+    // The static HTML has only JS-hydrated placeholder iframes (no inline label
+    // or href). The rendered page shows two CTAs, keyed by their hs-cta-embed
+    // id: 218250703105 = "DOWNLOAD" (gated brochure asset) and 213835778992 =
+    // "LET'S TALK" (contact). Replace each placeholder with a real button-link
+    // so the CTA survives the import; unknown ids are dropped.
+    const CTA_MAP = {
+      '218250703105': { label: 'Download', href: 'https://fluenceenergy.com/contact/' },
+      '213835778992': { label: "Let's Talk", href: 'https://fluenceenergy.com/contact/' },
+    };
+    element.querySelectorAll('.hs-cta-embed, [class*="hs-cta-embed"]').forEach((embed) => {
+      const cls = embed.getAttribute('class') || '';
+      const idMatch = cls.match(/hs-cta-embed-(\d+)/);
+      const cta = idMatch && CTA_MAP[idMatch[1]];
+      // The first CTA is wrapped in an otherwise-empty <h2>; if the embed's only
+      // meaningful ancestor is an empty heading, replace THAT so the button is a
+      // plain button-link paragraph (not rendered as a mid-article heading).
+      let target = embed;
+      const parent = embed.parentElement;
+      if (parent && /^H[1-6]$/.test(parent.tagName)
+        && parent.textContent.trim() === '' && parent.children.length === 1) {
+        target = parent;
+      }
+      if (cta) {
+        const p = element.ownerDocument.createElement('p');
+        const a = element.ownerDocument.createElement('a');
+        a.href = cta.href;
+        a.textContent = cta.label;
+        p.appendChild(a);
+        target.replaceWith(p);
+      } else {
+        target.remove();
+      }
+    });
 
     // --- Newsletter subscribe form -------------------------------------------
     // Keep the heading + the consent note only; strip the <form>/reCAPTCHA.

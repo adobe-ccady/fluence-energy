@@ -17,7 +17,7 @@ const PAGE_TEMPLATE = {
   sections: [
     { id: 'article-title-banner', name: 'article-title-banner', selector: ['header.banner.banner--single-post'], style: null, blocks: ['hero'], defaultContent: [] },
     { id: 'article-body', name: 'article-body', selector: ['section.section--post-content'], style: null, blocks: [], defaultContent: ['section.section--post-content'] },
-    { id: 'author-bio', name: 'author-bio', selector: ['section.post-author-block'], style: null, blocks: [], defaultContent: ['section.post-author-block'] },
+    { id: 'author-bio', name: 'author-bio', selector: ['section.post-author-block'], style: 'author', blocks: [], defaultContent: ['section.post-author-block'] },
     { id: 'newsletter-subscribe', name: 'newsletter-subscribe', selector: ['section.fullwidth-column.section:has(.article-subscribe)'], style: 'subscribe', blocks: [], defaultContent: ['section.fullwidth-column.section:has(.article-subscribe)'] },
     { id: 'related-posts', name: 'related-posts', selector: ['section.fullwidth-column.section:has(.recommended-posts)'], style: null, blocks: ['cards'], defaultContent: [] },
     { id: 'most-popular', name: 'most-popular', selector: ['section.fullwidth-column.section:has(.popular-posts)'], style: null, blocks: ['cards'], defaultContent: [] },

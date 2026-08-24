@@ -186,10 +186,30 @@ var CustomImportScript = (() => {
         "noscript",
         "style"
       ]);
-      WebImporter.DOMUtils.remove(element, [
-        ".hs-cta-embed",
-        '[class*="hs-cta-embed"]'
-      ]);
+      const CTA_MAP = {
+        "218250703105": { label: "Download", href: "https://fluenceenergy.com/contact/" },
+        "213835778992": { label: "Let's Talk", href: "https://fluenceenergy.com/contact/" }
+      };
+      element.querySelectorAll('.hs-cta-embed, [class*="hs-cta-embed"]').forEach((embed) => {
+        const cls = embed.getAttribute("class") || "";
+        const idMatch = cls.match(/hs-cta-embed-(\d+)/);
+        const cta = idMatch && CTA_MAP[idMatch[1]];
+        let target = embed;
+        const parent = embed.parentElement;
+        if (parent && /^H[1-6]$/.test(parent.tagName) && parent.textContent.trim() === "" && parent.children.length === 1) {
+          target = parent;
+        }
+        if (cta) {
+          const p = element.ownerDocument.createElement("p");
+          const a = element.ownerDocument.createElement("a");
+          a.href = cta.href;
+          a.textContent = cta.label;
+          p.appendChild(a);
+          target.replaceWith(p);
+        } else {
+          target.remove();
+        }
+      });
       const subscribe = element.querySelector(".article-subscribe");
       if (subscribe) {
         const form = subscribe.querySelector("form");
@@ -292,7 +312,7 @@ var CustomImportScript = (() => {
     sections: [
       { id: "article-title-banner", name: "article-title-banner", selector: ["header.banner.banner--single-post"], style: null, blocks: ["hero"], defaultContent: [] },
       { id: "article-body", name: "article-body", selector: ["section.section--post-content"], style: null, blocks: [], defaultContent: ["section.section--post-content"] },
-      { id: "author-bio", name: "author-bio", selector: ["section.post-author-block"], style: null, blocks: [], defaultContent: ["section.post-author-block"] },
+      { id: "author-bio", name: "author-bio", selector: ["section.post-author-block"], style: "author", blocks: [], defaultContent: ["section.post-author-block"] },
       { id: "newsletter-subscribe", name: "newsletter-subscribe", selector: ["section.fullwidth-column.section:has(.article-subscribe)"], style: "subscribe", blocks: [], defaultContent: ["section.fullwidth-column.section:has(.article-subscribe)"] },
       { id: "related-posts", name: "related-posts", selector: ["section.fullwidth-column.section:has(.recommended-posts)"], style: null, blocks: ["cards"], defaultContent: [] },
       { id: "most-popular", name: "most-popular", selector: ["section.fullwidth-column.section:has(.popular-posts)"], style: null, blocks: ["cards"], defaultContent: [] }

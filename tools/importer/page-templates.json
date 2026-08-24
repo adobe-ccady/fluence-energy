@@ -1199,7 +1199,7 @@
           "selector": [
             "section.post-author-block"
           ],
-          "style": null,
+          "style": "author",
           "blocks": [],
           "defaultContent": [
             "section.post-author-block"
