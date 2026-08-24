@@ -475,6 +475,9 @@ main .hero a.button.secondary:any-link:hover {
   text-decoration: none;
   color: #fff;
   cursor: pointer;
+  /* Ghost/outline button — no offset drop shadow (overrides the base
+     .hero a.button 3px 3px shadow). */
+  box-shadow: none;
   transition: background-color var(--transition-fast), color var(--transition-fast);
 }
 

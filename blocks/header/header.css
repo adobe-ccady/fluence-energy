@@ -416,9 +416,10 @@ header .nav-wrapper button:focus-visible {
   }
 
   header .nav-utility > nav {
-    max-width: var(--container-max-width);
-    margin: 0 auto;
-    padding: 0 24px;
+    /* Full-width bar with the links flush to the right edge (matching the
+       source and the main nav), rather than boxed into the centered
+       max-width container. */
+    padding: 0 36px 0 24px;
   }
 
   header .nav-utility-list {
